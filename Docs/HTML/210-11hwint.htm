@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 11whint.asm - Hardware Interrupts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 11hwint.asm - Hardware Interrupts</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="200-10swint.htm">Previous</a> | <a href="215-shortcut.htm">Next</a></p>
+<h3>Example - 11hwint.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; --------------------------------------------------------------
+; An example of using hardware interrupts.
+; This program spins the stepper motor continuously and 
+; steps the traffic lights on each hardware interrupt.
+
+; Uncheck the &quot;Show only one peripheral at a time&quot; box
+; to enable both displays to appear simultaneously.
+
+; --------------------------------------------------------------
+	JMP	Start	; Jump past table of interrupt vectors
+	DB	50	; Vector at 02 pointing to address 50
+
+Start:
+	STI		; Set I flag. Enable hardware interrupts
+	MOV	AL,11	;
+Rep:
+	OUT	05	; Stepper motor
+	ROR	AL	; Rotate bits in AL right
+	JMP	Rep
+	JMP	Start
+; --------------------------------------------------------------
+	ORG	50
+
+	PUSH	al	; Save AL onto the stack.
+	PUSH	bl	; Save BL onto the stack.
+	PUSHF		; Save flags onto the stack.
+
+	JMP	PastData
+
+	DB	84	; Red		Green
+	DB	c8	; Red+Amber	Amber
+	DB	30	; Green		Red
+	DB	58	; Amber		Red+Amber
+	DB	57	; Used to track progress through table
+PastData:
+	MOV	BL,[5B]	; BL now points to the data table
+	MOV	AL,[BL]	; Data from table goes into AL
+	OUT	01	; Send AL data to traffic lights
+	CMP	AL,58	; Last entry in the table
+	JZ	Reset	; If last entry then reset pointer
+
+	INC	BL	; BL points to next table entry
+	MOV	[5B],BL	; Save pointer in RAM
+	JMP	Stop
+Reset:
+	MOV	BL,57	; Pointer to data table start address
+	MOV	[5B],BL	; Save pointer into RAM location 54
+Stop:
+	POPF		; Restore flags to their previous value
+	POP	bl	; Restore BL to its previous value
+	POP	al	; Restore AL to its previous value
+
+	IRET
+; --------------------------------------------------------------
+
+END
+; --------------------------------------------------------------
+
+TASK
+
+28)	Write a program that controls the heater and thermostat 
+	whilst at the same time counting from 0 to 9 repeatedly, 
+	displaying the result on one of the seven segment displays.  
+	If you want a harder challenge, count from 0 to 99 repeatedly 
+	using both displays.  Use the simulated hardware interrupt to 
+	control the heater and thermostat.
+
+29)	A fiendish problem.  Solve the Tower of Hanoi problem whilst 
+	steering the snake through the maze.  Use the text characters 
+	A, B, C Etc. to represent the disks.  Use three of the four 
+	rows on the simulated screen to represent the pillars.
+	
+30)	Use the keyboard on Port 07. Write an interrupt handler 
+	(INT 03) to process the key presses. You must also process 
+	INT 02 (the hardware timer) but it need not perform any task. 
+	For a more advanced task, implement a 16 byte circular buffer. 
+	Write code to place the buffered text on the VDU screen when 
+	you press Enter. For an even harder task, implement code to 
+	process the Backspace key to delete text characters in the buffer. 	
+</pre>
+</td>
+</tr>
+</table>
+<p>You can copy this example program from the help page and paste it into the 
+  source code editor.</p>
+<h3> Hardware Interrupts</h3>
+<p>Hardware Interrupts are short code fragments that provide useful services that 
+  can be triggered by items of hardware. When a printer runs out of paper, it 
+  sends a signal to the CPU. The CPU interrupts normal processing and processes 
+  the interrupt. In this case code would run to display a &quot;Paper Out&quot; 
+  message on the screen. When this processing is complete, normal processing resumes.</p>
+<p>This simulator has a timer that triggers INT 02 at regular time intervals that 
+  you can pre-set in the Configuration Tab. You must put an interrupt vector at 
+  address 02 that points to your interrupt code. Look at the example. </p>
+<h3>STI and CLI</h3>
+<p>Hardware interrupts are ignored unless the 'I' flag in the status register 
+  is set. To set the 'I' flag, use the set 'I' command, STI. To clear the 'I' 
+  flag, use the clear 'I' command CLI. </p>
+<p>Hardware interrupts can be trapped in the same way that software interrupts 
+  can.</p>
+<p>Hardware interrupts are triggered, as needed by disk drives, printers, key 
+  presses, mouse movements and other hardware events.</p>
+<p>This scheme makes processing more efficient. Without interrupts, the CPU would 
+  have to poll the hardware devices at regular time intervals to see if any processing 
+  was needed. This would happen whether or not processing was necessary. Interrupts 
+  can be assigned priorities such that a disk drive might take priority over a 
+  printer. It is up to the programmer to optimise all this for efficient processing. 
+  In the IBM compatible PC, low number interrupts have a higher priority than 
+  the higher numbers.</p>
+<h3>Calling an Interrupt</h3>
+<p>This is quite complex. The command INT 02 whether triggered by hardware or 
+  software, causes the CPU to retrieve the contents of RAM location 02. After 
+  saving the return address onto the stack, the instruction pointer IP is set 
+  to the address that came from RAM.</p>
+<p>The interrupt code is then executed. When complete the IRET command causes 
+  the return from the interrupt. The CPU instruction pointer IP is set to the 
+  address that was saved onto the stack earlier.</p>
+<p>Hardware interrupts differ slightly from software interrupts. A software interrupt 
+  is called with a command like INT 02 and the return address is the next instruction 
+  after this. IP + 2 is pushed onto the stack. Hardware interrupts are not triggered 
+  by an instruction in a program so the return address does not have to be set 
+  past the calling instruction. IP is pushed onto the stack.</p>
+<h3> Trapping an Interrupt</h3>
+<p>This is the same as trapping software interrupts described on the <a href="200-10swint.htm">previous</a> 
+  page.</p>
+<p><a href="index.htm">Home</a> | <a href="200-10swint.htm">Previous</a> | <a href="215-shortcut.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

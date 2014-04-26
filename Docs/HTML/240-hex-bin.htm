@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Converting Between Binary and Hex</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Binary and Hexadecimal</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="230-glossary.htm">Previous</a> | <a href="245-IsetSummary.htm">Next</a></p>
+<h1>Converting Between Binary and Hex </h1>
+<p><br>
+  The CPU works using binary. Electronically this is done with electronic switches 
+  that are either on or off. This is represented on paper by noughts and ones. 
+  A single BIT or binary digit requires one wire or switch within the CPU. Usually 
+  data is handled in BYTES or multiples of bytes. A Byte is a group of eight bits. 
+  A byte looks like this </p>
+<h3>01001011</h3>
+<p>This is inconvenient to read, say and write down so programmers use hexadecimal 
+  to represent bytes. Converting between binary and hexadecimal is not difficult. 
+  First split the byte into two nybbles (half a byte) as follows </p>
+<h3>0100&nbsp;&nbsp;&nbsp; 1011</h3>
+<p>Then use the following table</p>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td><div align="center"><strong>&nbsp;BINARY&nbsp;</strong></div></td>
+    <td><div align="center"><strong>&nbsp;HEXADECIMAL&nbsp;</strong></div></td>
+    <td><div align="center"><strong>&nbsp;DECIMAL&nbsp;</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 0 0 0</strong></div></td>
+    <td><div align="center"><strong>0</strong></div></td>
+    <td><div align="center"><strong>0</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 0 0 1</strong></div></td>
+    <td><div align="center"><strong>1</strong></div></td>
+    <td><div align="center"><strong>1</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 0 1 0</strong></div></td>
+    <td><div align="center"><strong>2</strong></div></td>
+    <td><div align="center"><strong>2</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 0 1 1</strong></div></td>
+    <td><div align="center"><strong>3</strong></div></td>
+    <td><div align="center"><strong>3</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 1 0 0</strong></div></td>
+    <td><div align="center"><strong>4</strong></div></td>
+    <td><div align="center"><strong>4</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 1 0 1</strong></div></td>
+    <td><div align="center"><strong>5</strong></div></td>
+    <td><div align="center"><strong>5</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 1 1 0</strong></div></td>
+    <td><div align="center"><strong>6</strong></div></td>
+    <td><div align="center"><strong>6</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>0 1 1 1</strong></div></td>
+    <td><div align="center"><strong>7</strong></div></td>
+    <td><div align="center"><strong>7</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 0 0 0</strong></div></td>
+    <td><div align="center"><strong>8</strong></div></td>
+    <td><div align="center"><strong>8</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 0 0 1</strong></div></td>
+    <td><div align="center"><strong>9</strong></div></td>
+    <td><div align="center"><strong>9</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 0 1 0</strong></div></td>
+    <td><div align="center"><strong>A</strong></div></td>
+    <td><div align="center"><strong>10</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 0 1 1</strong></div></td>
+    <td><div align="center"><strong>B</strong></div></td>
+    <td><div align="center"><strong>11</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 1 0 0</strong></div></td>
+    <td><div align="center"><strong>C</strong></div></td>
+    <td><div align="center"><strong>12</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 1 0 1</strong></div></td>
+    <td><div align="center"><strong>D</strong></div></td>
+    <td><div align="center"><strong>13</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong> 1 1 1 0</strong></div></td>
+    <td><div align="center"><strong>E</strong></div></td>
+    <td><div align="center"><strong>14</strong></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>1 1 1 1</strong></div></td>
+    <td><div align="center"><strong>F</strong></div></td>
+    <td><div align="center"><strong>15</strong></div></td>
+  </tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>EXAMPLE</h3>
+<p> Split the byte into two halves</p>
+<p> <strong>01001011</strong> becomes <strong>0100&nbsp;&nbsp;&nbsp;&nbsp;1011</strong></p>
+<p> Using the table above</p>
+<p> <strong>0100</strong> is 4<br>
+  <strong>1011</strong> is B</p>
+<p> The answer ... </p>
+<p> <strong>0100&nbsp;&nbsp;&nbsp;&nbsp;1011</strong> is <strong>4B</strong> in 
+  Hexadecimal.</p>
+<p>&nbsp;</p>
+<p>To convert the other way take a hexadecimal such as E7.</p>
+<p><br>
+  Look up <strong>E</strong> in the table. It is <strong>1110</strong>.<br>
+  Look up <strong>7</strong> in the table. It is <strong>0111</strong>.</p>
+<p><br>
+  <strong>E7</strong> is <strong>1110&nbsp;&nbsp;&nbsp;&nbsp;0111</strong>.</p>
+<hr>
+<p><a href="index.htm">Home</a> | <a href="230-glossary.htm">Previous</a> | <a href="245-IsetSummary.htm">Next</a> 
+</p>
+<p>&copy; C Neil Bauers 2003 </p>
+</body>
+</html>

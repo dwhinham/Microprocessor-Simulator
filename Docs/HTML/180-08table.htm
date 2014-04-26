@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 08table.asm - Data Tables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 08table.asm - Data Tables</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="170-07textio.htm">Previous</a> | <a href="190-09param.htm">Next</a></p>
+<h3>Example - 08table.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ----- EXAMPLE 8 ------- DATA TABLES --------------------------
+
+	JMP	Start	; Skip past the data table.
+
+	DB	84	; Data table begins.
+	DB	C8	; These values control the traffic lights
+	DB	31	; This sequence is simplified.
+	DB	58	; Last entry is also used as end marker
+
+Start:
+	MOV	BL,02	; 02 is start address of data table
+Rep:
+	MOV	AL,[BL]	; Copy data from table to AL
+	OUT	01	; Output from AL register to port 01
+
+	CMP	AL,58	; Last item in data table ???
+	JZ	Start	; If yes then jump to Start
+	INC	BL	; In no then point BL to the next entry
+	JMP	Rep	; Jump back to do next table entry
+
+	END
+; --------------------------------------------------------------
+
+TASK
+
+18)	Improve the traffic lights data table so there is an 
+	overlap with both sets of lights on red.
+
+19)	Use a data table to navigate the snake through the maze.
+	This is on port 04.  Send FF to the snake to reset it.  
+	Up, down left and right are controlled by the left four bits.  
+	The right four bits control the distance moved.
+
+20)	Write a program to spin the stepper motor. Activate bits 
+	1, 2, 4 and 8 in sequence to energise the electromagnets
+	in turn. The motor can be half stepped by turning on pairs 
+	of magnets followed by a single magnet followed by a pair 
+	and so on.
+
+21)	Use a data table to make the motor perform a complex sequence 
+	of forward and reverse moves.  This is the type of control 
+	needed in robotic systems, printers and plotters.  For this 
+	exercise, it does not matter exactly what the motor does.
+
+; --------------------------------------------------------------</pre>
+</td>
+</tr>
+</table>
+<p>You can copy this example program from the help page and paste it into the 
+  source code editor.</p>
+<h3> DB 84</h3>
+<p>DB stands for Define Byte/s. In this case 84hex is stored into RAM at address 
+  [02]. Addresses [00] and [01] are occupied by the JMP Start machine codes.</p>
+<p>84 hex is 1000 0100 in binary. This is the pattern or noughts and ones needed 
+  to turn on the left red light and the right green light.</p>
+<h3>MOV BL,02</h3>
+<p>Move 02 into the BL register. [O2] is the RAM address of the start of the data 
+  table. BL is used as a pointer to the data table. </p>
+<h3> MOV AL,[BL]</h3>
+<p>[BL] points to the data table. This line copies a value from the data table 
+  into the AL register.</p>
+<h3> OUT 01</h3>
+<p>Send the contents of the AL register to port 01. Port 01 is connected to the 
+  traffic lights.</p>
+<h3> CMP AL,58</h3>
+<p>58 is the last entry in the data table. If AL contains 58, it is necessary 
+  to reset BL to point back to the start of the table ready to repeat the sequence. 
+  If AL is equal to 58, the 'Z' flag in the CPU will be set.</p>
+<h3>JZ Start</h3>
+<p>Jump back to start if the 'Z' flag in the CPU is set.</p>
+<h3> INC BL</h3>
+<p>Add one to BL to make it point to the next entry in the data table.</p>
+<p><a href="index.htm">Home</a> | <a href="170-07textio.htm">Previous</a> | <a href="190-09param.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 10swint.asm - Software Interrupts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 10swint.asm - Software Interrupts</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="190-09param.htm">Previous</a> | <a href="210-11hwint.htm">Next</a></p>
+<h3>Example - 10swint.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; --------------------------------------------------------------
+; An example of software interrupts.
+; --------------------------------------------------------------
+	JMP	Start	; Jump past table of interrupt vectors
+	DB	51	; Vector at 02 pointing to address 51
+	DB	71	; Vector at 03 pointing to address 71
+Start:
+	INT	02	; Do interrupt 02
+	INT	03	; Do interrupt 03
+	JMP	Start
+; --------------------------------------------------------------
+
+	ORG	50
+	DB	E0	; Data byte - could be a whole table here
+			; Interrupt code starts here
+	MOV	AL,[50]	; Copy bits from RAM into AL
+	NOT	AL	; Invert the bits in AL
+	MOV	[50],AL	; Copy inverted bits back to RAM
+	OUT	01	; Send data to traffic lights
+	IRET
+; --------------------------------------------------------------
+	ORG	70
+	DB	0	; Data byte  - could be a table here
+
+; Interrupt code starts here
+	MOV	AL,[70]	; Copy bits from RAM into AL
+	NOT	AL	; Invert the bits in AL
+	AND	AL,FE	; Force right most bit to zero
+	MOV	[70],AL	; Copy inverted bits back to RAM
+	OUT	02	; Send data to seven segment display
+	IRET
+; --------------------------------------------------------------
+	END
+; --------------------------------------------------------------
+
+TASK
+
+26)	Write a new interrupt 02 that fetches a key press from the 
+	keyboard and stores it into RAM.  The IBM PC allocates 16 
+	bytes for key press storage.  The 16 locations are used in 
+	a circular fashion.
+
+27)	Create a new interrupt that puts characters onto the next 
+	free screen location.  See if you can get correct behaviour 
+	in response to the Enter key being pressed (fairly easy) 
+	and if the Back Space key is pressed (harder).
+</pre>
+</td>
+</tr>
+</table>
+<p>You can copy this example program from the help page and paste it into the 
+  source code editor.</p>
+<h3> Interrupts and Procedures</h3>
+<p>Interrupts are short code fragments that provide useful services that can be 
+  used by other programs. Typical routines handle key presses, mouse movements 
+  and button presses, screen writing, disk reading and writing and so on.</p>
+<p>An interrupt is like a procedure but it is called in a different way. Procedures 
+  are called by jumping to the start address of the procedure. This address is 
+  known only to the program that owns the procedure. Interrupts are called by 
+  looking up the address of the interrupt code in a table of interrupt vectors. 
+  The contents of this table is published and widely known. MS DOS makes heavy 
+  use of interrupts for all its disk, screen, mouse, network, keyboard and other 
+  services.</p>
+<p>By writing your own code and making the interrupt vector point to the code 
+  you wrote, the behaviour of interrupts can be completely altered. Your interrupt 
+  code might add some useful behaviour and then jump back to the original code 
+  to complete the work. This is called TRAPPING the interrupt.</p>
+<p><strong>Software interrupts</strong> are triggered, on demand, by programs. 
+</p>
+<p><strong>Hardware interrupts</strong> are triggered by electronic signals to 
+  the CPU from hardware devices.</p>
+<h3> Interrupt Vector Table</h3>
+<p>In the IBM compatible computer, addresses 0 to 1024 decimal are used for storing 
+  interrupt vectors. The entries in this table of vectors point to all the code 
+  fragments that control MS DOS screen, disk, mouse, keyboard and other services. 
+  The simulator vectors sit between addresses 0 and 15 decimal. It is convenient 
+  to start a simulator program with a jump command that occupies two bytes. This 
+  means that the first free address for an interrupt vector is [02]. This is used 
+  by the hardware timer if the interrupt flag is set.</p>
+<p>Have another look at the example program. 10swint.asm</p>
+<h3>Calling an Interrupt</h3>
+<p>This is quite complex. The command INT 02 causes the CPU to retrieve the contents 
+  of RAM location 02. After saving the return address onto the stack, the instruction 
+  pointer IP is set to this address.</p>
+<p>The interrupt code is then executed. When complete the IRET command causes 
+  the return from the interrupt. The CPU instruction pointer IP is set to the 
+  address that was saved onto the stack earlier.</p>
+<h3>Trapping an Interrupt</h3>
+<p>If you wan to trap interrupt 02, change the address stored at address 02 to 
+  point to code that you have written. Your code will then handle the interrupt. 
+  When complete, your code can use IRET to return from the interrupt or it can 
+  jump to the address that was originally in address 02. This causes the original 
+  interrupt code to be executed as well. In this way, you can replace or modify 
+  the behaviour of an interrupt.</p>
+<p><a href="index.htm">Home</a> | <a href="190-09param.htm">Previous</a> | <a href="210-11hwint.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

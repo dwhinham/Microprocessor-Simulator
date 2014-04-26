@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Other Instructions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Other Instructions</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="320-InputOutput.htm">Previous</a> | 
+  <a href="350-ListFile.htm">Next</a></p>
+<h3>Miscellaneous Instructions - CLI and STI control the (I) Flag</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr bgcolor="#FFFFCC"> 
+    <td><strong>Assembler</strong></td>
+    <td><strong>Machine&nbsp;Code</strong></td>
+    <td><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td>HALT </td>
+    <td>00</td>
+    <td>Stop the program.<br>
+      00 is the machine instruction for HALT. <br>
+      The program will cease to run if it encounters a HALT instruction. <br>
+      Continuous running is cancelled by this command. <br>
+      You can have several halt commands in one program. <br>
+      There should be only one END and code after END is ignored.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>NOP</td>
+    <td>FF</td>
+    <td>Do nothing for one clock cycle.<br>
+      FF is the machine instruction for NOP. <br>
+      The program will do nothing for one clock cycle. <br>
+      The program then continues as normal. <br>
+      NOP is used to introduce time delays to allow slow electronics to keep up 
+      with the CPU. These are also called WAIT STATES. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>CLO</td>
+    <td>FE</td>
+    <td>Close all the peripheral windows.<br>
+      FE is the machine code for CLO. <br>
+      It applies to this simulator only, and is used to close peripheral windows. 
+      <br>
+      This makes it easier to write demonstration programs without the screen 
+      getting too cluttered. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>ORG 30</td>
+    <td>NONE</td>
+    <td>Code Origin. Generate code starting from this address.<br>
+      To generate code from a starting address other than zero use ORG. <br>
+      This is useful to place procedures, interrupts or data tables at particular 
+      addresses in memory. <br>
+      ORG is an assembler directive and no code is generated.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DB 84</td>
+    <td>84</td>
+    <td>Define a byte. <br>
+      Store the byte (84) in the next free RAM location.<br>
+      Use DB to create data tables containing bytes of data.<br>
+      Use BD to define an Interrupt Vector.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DB &quot;Hello&quot;</td>
+    <td>48,&nbsp;65,&nbsp;6C,&nbsp;6C,&nbsp;6F</td>
+    <td>Define a string. <br>
+      Store the ASCII codes of the text in quotes in the next free RAM locations.<br>
+      Use DB to store text strings.<br>
+      The stored ASCII codes do not include an end-of-string marker. <br>
+      Use <strong>DB 00</strong> for this.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CLI</td>
+    <td>FD</td>
+    <td>Clear the I flag<br>
+      If the I flag is cleared, hardware interrupts are ignored. <br>
+      This is the default state for the simulator. <br>
+      Resetting the CPU will also clear the I flag. <br>
+      The timer that generates hardware interrupts will do nothing. </td>
+  </tr>
+  <tr valign="top">
+    <td>STI</td>
+    <td>FC</td>
+    <td>Set the I flag<br>
+      If the I flag is set, the simulator will generate INT 02 at regular time 
+      intervals. <br>
+      It is necessary to have an interrupt vector stored at address 02 that points 
+      to interrupt handler code stored elsewhere. <br>
+      The interval between timer interrupts can be set using the slider in the 
+      Configuration Tab.<br>
+      If interrupts occur faster than the processor can handle them, a simulated 
+      system crash will follow. <br>
+      Adjust the CPU clock speed and the timer interval to prevent this &#8211; 
+      or cause it if you want to see what happens.</td>
+  </tr>
+</table>
+
+
+<p>It is possible to program the simulator using pure machine codes. Here is a 
+  simple example.</p>
+<pre>
+; ===== NORMAL CODE =====
+	MOV AL,0
+	INC AL
+	END
+; ===== NORMAL CODE =====</pre>
+<p>
+  Here is the same program in pure machine code apart from the required END keyword. 
+  This should run exactly as the program above.</p>
+<pre>
+; ===== PURE MACHINE CODE =====
+	DB D0 ; MOV
+	DB 00 ; AL
+	DB 00 ; 0
+	DB A4 ; INC
+	DB 00 ; AL
+	END
+; ===== PURE MACHINE CODE =====</pre>
+<p> This is an interesting exercise but rather defeats the whole point of using 
+  an assembler. If you have a dog, why bark yourself? Manually calculating jump 
+  distances might be a useful learning exercise, especially for negative jumps.</p>
+<p><a href="index.htm">Home</a> | <a href="320-InputOutput.htm">Previous</a> | 
+  <a href="350-ListFile.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 03move.asm - Data Moves</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 03move.asm - Data Moves</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="120-02tlight.htm">Previous</a> | <a href="140-04IncJmp.htm">Next</a></p>
+<h3>Example - 03move.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ---------------------------------------------------------------<br>
+; A program to demonstrate MOV commands. Mov is short for move.<br>
+; ---------------------------------------------------------------
+	CLO		; Close unwanted windows.
+; ===== IMMEDIATE MOVES =====
+	MOV	AL,15	; Copy 15 HEX into the AL register
+	MOV	BL,40	; Copy 40 HEX into the BL register
+	MOV	CL,50	; Copy 50 HEX into the CL register
+	MOV	DL,60	; Copy 60 HEX into the DL register
+Foo:
+	INC AL		; Increment AL for no particular reason.
+	
+; ===== INDIRECT MOVES =====
+	MOV	[A0],AL	; Copy value in AL to RAM location [A0]
+	MOV	BL,[40]	; Copy value in RAM location [40] into BL
+	
+; ===== REGISTER INDIRECT MOVES =====
+	MOV	[CL],AL ; Copy the value in AL to the RAM
+			; location that CL points to.
+	MOV	BL,[CL] ; Copy the RAM location that CL points
+			; to into the BL register.
+				
+	JMP Foo		; PRESS ESCAPE TO STOP THE PROGRAM
+	
+	END
+; ---------------------------------------------------------------
+	TASK
+	====
+	Look up the ASCII codes of the letters in H,E,L,L,O and move 
+	these ASCII codes to RAM addresses [C0], [C1], [C2], [C3] 
+	and [C4]. Run the program and watch how the text appears on 
+	the simulated VDU display. This is very much the same as what 
+	happens in the IBM PC running MS DOS. The program you write 
+	should work but if you continue to study low level programming, 
+	you will find much more efficient and flexible ways of solving 
+	this problem.
+</pre>
+</td>
+</tr>
+</table>
+<p>Step through the program and watch the register values changing. In particular, 
+  look at the RAM-Hex display and note the way that values in RAM change. Addresses 
+  [50] and [A0] are altered. You can copy the example program from the help page 
+  and paste it into the source code editor.</p>
+<h3>Addresing Modes</h3>
+<p> There are several <strong>ADDRESSING MODES</strong> available with move commands.</p>
+<h3>Immediate Addressing</h3>
+<p>A hexadecimal number is copied into a register. <strong>Examples...</strong></p>
+<p> MOV AL,15 ; Copy 15 HEX into the AL register<br>
+  MOV BL,40 ; Copy 40 HEX into the BL register<br>
+  MOV CL,50 ; Copy 50 HEX into the CL register<br>
+  MOV DL,60 ; Copy 60 HEX into the DL register</p>
+<h3>Indirect Addressing </h3>
+<p>A value is moved to or from RAM. The ram address is given as a number like 
+  [22] in square brackets. <strong>Examples...</strong></p>
+<p> MOV [A0],AL ; Copy value in AL to RAM location [40]<br>
+  MOV BL,[40] ; Copy value in RAM location [A0] into BL</p>
+<h3>Register Indirect Addressing </h3>
+<p>Copy a value from RAM to a register or copy a value from a register to RAM. 
+  The RAM address is contained in a second register enclosed in square brackets 
+  like this [CL]. <strong>Examples ...</strong></p>
+<p> MOV [CL],AL ; Copy the value in AL to the RAM location that CL points to.<br>
+  MOV BL,[CL] ; Copy the RAM location that CL points to into the BL register.</p>
+<h3>Register Moves</h3>
+<p> Not available in this simulation.</p>
+<p>A register move looks like this </p>
+<p> MOV AL,BL</p>
+<p>To do this using simulator commands, use </p>
+<p> PUSH BL<br>
+  POP AL</p>
+<p>Push and Pop are explained later. </p>
+<h3> Calculated Addresses</h3>
+<p> Not available in this simulator. </p>
+<p>Copy a value from RAM to a register or copy a value from a register to RAM. 
+  The RAM address is contained in square brackets and is calculated. This is done 
+  to simplify access to record structures. For example a surname might be stored 
+  12 bytes from the start of the record. This technique is shown in the examples 
+  below.</p>
+<p>MOV [CL + 5],AL ; Copy the value in AL to the RAM location that CL + 5 points 
+  to.<br>
+  MOV BL,[CL + 12] ; Copy the RAM location that CL + 12 points to into the BL 
+  register.</p>
+<h3>Implied Addresses</h3>
+<p> Not available in this simulator. </p>
+<p>In this case, memory locations are named. Address [50] might be called 'puppy'. 
+  This means that moves can be programmed like this.</p>
+<p> MOV AL,puppy ; Copy the value in RAM at position puppy into the AL register.<br>
+  MOV puppy,BL ; Copy BL into the RAM location that puppy refers to.</p>
+<p><a href="index.htm">Home</a> | <a href="120-02tlight.htm">Previous</a> | <a href="140-04IncJmp.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

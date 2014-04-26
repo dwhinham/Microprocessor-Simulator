@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Getting Started</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Using the Simulator - Getting Started</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="070pcsupport.htm">Previous</a> | <a href="090learning-tasks.htm">Next</a></p>
+<p><img src="080cpu.PNG" alt="User Interface Layout Image" width="627" height="328"></p>
+<h3>On Line Help</h3>
+<p>Press the <strong>F1</strong> key to get on line help. </p>
+<h3>Writing a Program</h3>
+<p>To write and run a program using the simulator, select the source code editor 
+  tab by pressing <strong>Alt+U</strong>.</p>
+<p>Type in your program. It is best to get small parts of the program working 
+  rather than typing it all in at once.</p>
+<p>Here is a simple example. Also look at the tutorial example programs. You can 
+  type this into the simulator or copy and paste it. The assembly code has been 
+  annotated with comments that explain the code. These comments are ignored by 
+  the assembler program. Comments begin with a semicolon and continue to the end 
+  of the line.</p>
+<table border="1" cellspacing="0" cellpadding="5">
+  <tr>
+    <td bgcolor="#ccddee">
+<pre>
+
+; ===== COUNT =================================================
+	MOV	AL,0	; Move 0 into the AL register
+REP:			; This label is used with jump commands
+	ADD	AL,2	; Add two to AL
+	JMP	REP	; Jump back to the rep label
+	
+	END		; Program ends here
+; =============================================================</pre>
+	</td>
+  </tr>
+</table>
+<h3>&nbsp; </h3>
+<h3>Running a Program</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td><img src="080step.PNG" alt="Step Button Image" width="60" height="23"></td>
+    <td>To run a program, you can step through it one line at a time by pressing 
+      <strong>Alt+P</strong> or by clicking this button repeatedly. </td>
+  </tr>
+  <tr> 
+    <td><img src="080run.PNG" alt="Run Button Image" width="60" height="23"></td>
+    <td>You can run a program continuously by pressing <strong>F9</strong> or 
+      <strong>Alt+R</strong> or by pressing this button</td>
+  </tr>
+  <tr> 
+    <td><img src="080faster-slower.PNG" alt="Faster and Slower Button Images" width="60" height="46"></td>
+    <td>To speed up or slow down a running program use these buttons or type <strong>Alt+L</strong> 
+      or <strong>Alt+T</strong></td>
+  </tr>
+  <tr> 
+    <td><img src="080stop.PNG" alt="Stop Button Image" width="60" height="23"></td>
+    <td>To stop a running program press <strong>Alt+O</strong> or click or press 
+      <strong>Escape</strong> or press this button.</td>
+  </tr>
+  <tr> 
+    <td><img src="080continue.PNG" alt="Continue Button Image" width="60" height="23"></td>
+    <td>To restart a paused program, continuing from where it left off, press 
+      <strong>Alt+N</strong> or click this button.</td>
+  </tr>
+  <tr> 
+    <td><img src="080reset.PNG" alt="CPU Reset Button Image" width="60" height="23"></td>
+    <td>To restart a program from the beginning, reset the CPU by pressing <strong>Alt+E</strong> 
+      or click this button.</td>
+  </tr>
+  <tr>
+    <td><img src="080show-ram.PNG" alt="Show Ram Button Image" width="60" height="23"></td>
+    <td>To re-open the RAM display window, press <strong>Alt+M</strong> or click 
+      this button.</td>
+  </tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>Assembly Code</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><div align="center"><img src="080assemble.PNG" alt="Assemble Button Image" width="60" height="23"></div></td>
+    <td>The code you type is called assembly code. This human-readable code is 
+      translated into machine code by the <strong>Assembler.</strong> The machine 
+      code (binary) is understood by the CPU. To assemble a program, press <strong>Alt+A</strong> 
+      or click this button.</td>
+  </tr>
+  <tr>
+    <td><img src="080log-asm.PNG" alt="Log Activity Button Image" width="213" height="27"></td>
+    <td>You can see an animation of the assembler process by checking this box.</td>
+  </tr>
+  <tr>
+    <td><div align="center"><img src="080run.PNG" alt="Run Button Image" width="60" height="23"></div></td>
+    <td>When you run or setp a program, if necessary, the code is assembled.</td>
+  </tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>Assembler Phases</h3>
+<p>There is short delay while the assembbler goes through all the stages of assembling 
+  the program. The steps are</p>
+
+<ol>
+  <li><strong>Save</strong> the source code.</li>
+  <li>Convert the source code into <strong>tokens</strong> (this simulator uses 
+    human readable tokens for educational value rather than efficiency).</li>
+  <li><strong>Parse</strong> the source code and (if necessary) generate error 
+    messages. If there are no errors, generate the machine codes. This process 
+    could be coded more efficiently. If the tokens representing machine op codes 
+    like MOV and JMP were numerical, the assembler could look up the machine code 
+    equivalents in an array instead of ploughing through many if-then-else statements. 
+    Once again, this has been done to demonstrate the process of assembling code 
+    for educational reasons. </li>
+  <li><strong>Calculate jumps</strong>, the distances of the jump/branch instructions.</li>
+</ol>
+<h3> Viewing Machine Code</h3>
+<p>The machine code stored in RAM can be viewed in three modes by selecting the 
+  appropriate radio button.</p>
+<p><img src="080ram.PNG" alt="Ram Contents Image" width="665" height="300"></p>
+<p> <strong>Hexadecimal</strong> - This display corresponds exactly to the binary 
+  executed by the CPU. </p>
+<p><strong>ASCII</strong> - This display is convenient if your program is processing 
+  text. The text is readable but the machine codes are not. </p>
+<p><strong>Source Code</strong> - This display shows how the assembly code commands 
+  are placed in memory.</p>
+<h3> Tutorial Examples</h3>
+<p>The tutorial examples provide a step by step introduction to the commands and 
+  techniques of low level programming. Each program has one or more learning tasks 
+  associated with it. Some of the tasks are simple. Some are real brain teasers. 
+</p>
+<p><a href="index.htm">Home</a> | <a href="070pcsupport.htm">Previous</a> | <a href="090learning-tasks.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

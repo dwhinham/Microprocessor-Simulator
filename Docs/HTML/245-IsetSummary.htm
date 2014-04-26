@@ -1,0 +1,772 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Instruction Set Summary</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Instruction Set Summary</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="240-hex-bin.htm">Previous</a> | <a href="250-FullIset.htm">Next</a></p>
+<p>AL, BL, CL and DL are eight bit, general purpose registers where data is stored.</p>
+<p>Square brackets indicate RAM locations. For example [15] means RAM location 
+  15.</p>
+<p>Data can be moved from a register into into RAM and also from RAM into a register.</p>
+<p>Registers can be used as pointers to RAM. [BL] is the RAM location that BL 
+  points to.</p>
+<p>All numbers are in base 16 (Hexadecimal).</p>
+
+<table border="0" cellspacing="0" cellpadding="1">
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"><hr> <h3>Move Instructions. Flags NOT set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td bgcolor="#FFFFCC"> </td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> </td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MOV</td>
+    <td bgcolor="#FFFFCC">AL,15</td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><strong>D0&nbsp;00&nbsp;15</strong></td>
+    <td bgcolor="#FFFFCC"> <div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> <div align="left">15</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Copy 15 into AL</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MOV</td>
+    <td bgcolor="#FFFFCC">BL,[15]</td>
+    <td>&nbsp;</td>
+    <td><strong>D1 01 15</strong></td>
+    <td bgcolor="#FFFFCC"> <div align="right">BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> <div align="left">[15]</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Copy RAM[15] into BL</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MOV</td>
+    <td bgcolor="#FFFFCC">[15],CL</td>
+    <td>&nbsp;</td>
+    <td><strong>D2 15 02</strong></td>
+    <td bgcolor="#FFFFCC"> <div align="right">[15]</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> <div align="left">CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Copy CL into RAM[15]&nbsp;</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MOV</td>
+    <td bgcolor="#FFFFCC">DL,[AL]</td>
+    <td>&nbsp;</td>
+    <td><strong>D3 03 00</strong></td>
+    <td bgcolor="#FFFFCC"> <div align="right">DL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> <div align="left">[AL]</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Copy RAM[AL] into DL</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MOV</td>
+    <td bgcolor="#FFFFCC">[CL],AL</td>
+    <td>&nbsp;</td>
+    <td><strong>D4 02 00</strong></td>
+    <td bgcolor="#FFFFCC"> <div align="right">[CL]</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> <div align="left">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Copy AL into RAM[CL]&nbsp;</strong></td>
+  </tr>
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"> <hr> <h3 align="left">Direct Arithmetic 
+        and Logic. Flags are set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td bgcolor="#FFFFCC"> </td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> </td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">ADD</td>
+    <td bgcolor="#FFFFCC">AL,BL</td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><strong>A0 00 01</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">AL + BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">SUB</td>
+    <td bgcolor="#FFFFCC">BL,CL</td>
+    <td>&nbsp;</td>
+    <td><strong>A1 01 02</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">BL - CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MUL</td>
+    <td bgcolor="#FFFFCC">CL,DL</td>
+    <td>&nbsp;</td>
+    <td><strong>A2 02 03</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">CL * DL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">DIV</td>
+    <td bgcolor="#FFFFCC">DL,AL</td>
+    <td>&nbsp;</td>
+    <td><strong>A3 03 00</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">DL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">DL / AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">INC</td>
+    <td bgcolor="#FFFFCC">DL</td>
+    <td>&nbsp;</td>
+    <td><strong>A4 03</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">DL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">DL + 1</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">DEC</td>
+    <td bgcolor="#FFFFCC">AL</td>
+    <td>&nbsp;</td>
+    <td><strong>A5 00</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">AL - 1</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">AND</td>
+    <td bgcolor="#FFFFCC">AL,BL</td>
+    <td>&nbsp;</td>
+    <td><strong>AA 00 01</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">AL AND BL&nbsp;</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">OR</td>
+    <td bgcolor="#FFFFCC">CL,BL</td>
+    <td>&nbsp;</td>
+    <td><strong>AB 03 02</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">CL OR BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">XOR</td>
+    <td bgcolor="#FFFFCC">AL,BL</td>
+    <td>&nbsp;</td>
+    <td><strong>AC 00 01</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">AL XOR BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">NOT</td>
+    <td bgcolor="#FFFFCC">BL</td>
+    <td>&nbsp;</td>
+    <td><strong>AD 01</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><div align="left">NOT BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">ROL</td>
+    <td bgcolor="#FFFFCC">AL</td>
+    <td>&nbsp;</td>
+    <td><strong>9A 00</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left">Rotate bits left. LSB 
+        = MSB</div></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">ROR</td>
+    <td bgcolor="#FFFFCC">BL</td>
+    <td>&nbsp;</td>
+    <td><strong>9B 01</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Rotate bits right. MSB = LSB</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">SHL</td>
+    <td bgcolor="#FFFFCC">CL</td>
+    <td>&nbsp;</td>
+    <td><strong>9C 02</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left">Shift bits left. Discard 
+        MSB. </div></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">SHR</td>
+    <td bgcolor="#FFFFCC">DL</td>
+    <td>&nbsp;</td>
+    <td><strong>9D 03</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left">Shift bits right. Discaed 
+        LSB. </div></td>
+  </tr>
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"> <hr> <h3 align="left">Immediate Arithmetic 
+        and Logic. Flags are set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td bgcolor="#FFFFCC"></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"> </td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">ADD</td>
+    <td bgcolor="#FFFFCC">AL,12</td>
+    <td>&nbsp;</td>
+    <td><strong>B0 00 12</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">AL + 12</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">SUB</td>
+    <td bgcolor="#FFFFCC">BL,15</td>
+    <td>&nbsp;</td>
+    <td><strong>B1 01 15</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">BL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">BL - 15</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">MUL</td>
+    <td bgcolor="#FFFFCC">CL,03</td>
+    <td>&nbsp;</td>
+    <td><strong>B2 02 03</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">CL * 3</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">DIV</td>
+    <td bgcolor="#FFFFCC">DL,02</td>
+    <td>&nbsp;</td>
+    <td><strong>B6 03 02</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">DL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">DL / 2</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">AND</td>
+    <td bgcolor="#FFFFCC">AL,10</td>
+    <td>&nbsp;</td>
+    <td><strong>BA 00 10</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">AL AND 10</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">OR</td>
+    <td bgcolor="#FFFFCC">CL,F0</td>
+    <td>&nbsp;</td>
+    <td><strong>BB 02 F0</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">CL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">CL OR F0</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">XOR</td>
+    <td bgcolor="#FFFFCC">AL,AA</td>
+    <td>&nbsp;</td>
+    <td><strong>BC 00 AA</strong></td>
+    <td bgcolor="#FFFFCC"><div align="right">AL</div></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">=</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">AL XOR AA&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"> <hr> <h3 align="left">Compare Instructions. 
+        Flags are set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left"><strong>Explanation</strong></div>
+      </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CMP</td>
+    <td valign="top" bgcolor="#FFFFCC">AL,BL</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>DA 00 01</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left">Set 'Z' flag if AL = BL.<br>
+        Set 'S' flag if AL &lt; BL.<br>
+        &nbsp; </div></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CMP</td>
+    <td valign="top" bgcolor="#FFFFCC">BL,13</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>DB 01 13</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><div align="left">Set 'Z' flag if BL = 13.<br>
+        Set 'S' flag if BL &lt; 13.<br>
+        &nbsp; </div></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CMP</td>
+    <td valign="top" bgcolor="#FFFFCC">CL,[20]&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>DC 02 20</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Set 'Z' flag if CL = [20].<br>
+      Set 'S' flag if CL &lt; [20].<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td colspan="12" valign="top" bgcolor="#FFFFCC"><hr> <h3>Branch Instructions. 
+        Flags NOT set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td colspan="11" valign="top" bgcolor="#FFFFCC"><p>Depending on the type of 
+        jump, different machine codes can be generated. <br>
+        Jump instructions cause the instruction pointer (IP) to be altered. The 
+        largest <br>
+        possible jumps are +127 bytes and -128 bytes.</p>
+      <p>The CPU flags control these jumps. The 'Z' flag is set if the most recent 
+        <br>
+        calculation gave a Zero result. The 'S' flag is set if the most recent 
+        calculation <br>
+        gave a negative result. The 'O' flag is set if the most recent calculation 
+        gave <br>
+        a result too big to fit in the register.</p></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JMP</td>
+    <td valign="top" bgcolor="#FFFFCC">HERE</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C0 12<br>
+      C0 FE</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 12<br>
+      Decrease IP by 2 (twos complement)<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JZ</td>
+    <td valign="top" bgcolor="#FFFFCC">THERE</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C1 09<br>
+      C1 9C</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 9 if the 'Z' flag is set.<br>
+      Decrease IP by 100 if the 'Z' flag is set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JNZ</td>
+    <td valign="top" bgcolor="#FFFFCC">A_Place</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C2 04<br>
+      C2 F0</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 4 if the 'Z' flag is NOT 
+      set.<br>
+      Decrease IP by 16 if the 'Z' flag is NOT set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JS</td>
+    <td valign="top" bgcolor="#FFFFCC">STOP</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C3 09<br>
+      C3 E1</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 9 if the 'S' flag is set.<br>
+      Decrease IP by 31 if the 'S' flag is set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JNS</td>
+    <td valign="top" bgcolor="#FFFFCC">START</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C4 04<br>
+      C4 E0</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 4 if the 'S' flag is NOT 
+      set.<br>
+      Decrease IP by 32 if the 'S' flag is NOT set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JO</td>
+    <td valign="top" bgcolor="#FFFFCC">REPEAT</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C5 09<br>
+      C5 DF</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 9 if the 'O' flag is set.<br>
+      Decrease IP by 33 if the 'O' flag is set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">JNO</td>
+    <td valign="top" bgcolor="#FFFFCC">AGAIN</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>C6 04<br>
+      C6 FB</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Increase IP by 4 if the 'O' flag is NOT 
+      set.<br>
+      Decrease IP by 5 if the 'O' flag is NOT set.<br> &nbsp; </td>
+  </tr>
+  <tr> 
+    <td colspan="12" valign="top" bgcolor="#FFFFCC"><hr> <h3>Procedures and Interrupts. 
+        Flags NOT set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td colspan="11" valign="top" bgcolor="#FFFFCC"><p>CALL, RET, INT and IRET 
+        are available only in the registered version.</p></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CALL</td>
+    <td valign="top" bgcolor="#FFFFCC">30</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>CA 30</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Save IP on the stack and jump to the<br>
+      procedure at address 30.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">RET</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>CB</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Restore IP from the stack and jump to it.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">INT</td>
+    <td valign="top" bgcolor="#FFFFCC">02</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>CC 02</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Save IP on the stack and jump to the address<br>
+      (interrupt vector) retrieved from RAM[02].</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">IRET</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>CD</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">Restore IP from the stack and jump to it.</td>
+  </tr>
+  <tr> 
+    <td colspan="12" valign="top" bgcolor="#FFFFCC"><hr> <h3>Stack Manipulation 
+        Instructions. Flags NOT set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">PUSH</td>
+    <td valign="top" bgcolor="#FFFFCC">BL</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>E0 01</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">BL is saved onto the stack.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">POP</td>
+    <td valign="top" bgcolor="#FFFFCC">CL</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>E1 02</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">CL is restored from the stack.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">PUSHF</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>EA</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">SR flags are saved onto the stack.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">POPF</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>EB</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC">SR flags are restored from the stack.</td>
+  </tr>
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"><hr> <h3>Input Output Instructions. Flags 
+        NOT set.</h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">IN</td>
+    <td valign="top" bgcolor="#FFFFCC">07</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">F0 07</td>
+    <td colspan="7" bgcolor="#FFFFCC">Data input from I/O port 07 to AL.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">OUT</td>
+    <td valign="top" bgcolor="#FFFFCC">01</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"> F1 01</td>
+    <td colspan="7" bgcolor="#FFFFCC">Data output to I/O port 07 from AL.</td>
+  </tr>
+  <tr> 
+    <td colspan="12" bgcolor="#FFFFCC"> <hr> <h3>Miscellaneous Instructions. CLI 
+        and STI set I flag. </h3></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC"><strong>Assembler</strong></td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top"><strong>Machine&nbsp;Code&nbsp;</strong></td>
+    <td colspan="7" bgcolor="#FFFFCC"><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CLO</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">FE</td>
+    <td colspan="7" bgcolor="#FFFFCC">Close visible peripheral windows.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">HALT</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">00</td>
+    <td colspan="7" bgcolor="#FFFFCC">Halt the processor.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">NOP</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">FF</td>
+    <td colspan="7" bgcolor="#FFFFCC">Do nothing for one clock cycle.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">STI</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">FC</td>
+    <td colspan="7" bgcolor="#FFFFCC">Set the interrupt flag in the Status Register.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">CLI</td>
+    <td valign="top" bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">FD</td>
+    <td colspan="7" bgcolor="#FFFFCC">Clear the interrupt flag in the Status Register.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">ORG</td>
+    <td valign="top" bgcolor="#FFFFCC">40</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">Code origin</td>
+    <td colspan="7" bgcolor="#FFFFCC">Assembler directive: Generate code starting 
+      <br>
+      from address 40.</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">DB</td>
+    <td valign="top" bgcolor="#FFFFCC">&quot;Hello&quot;</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">Define byte</td>
+    <td colspan="7" bgcolor="#FFFFCC">Assembler directive: Store the ASCII codes<br>
+      of 'Hello' into RAM.</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFCC">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFCC">DB</td>
+    <td valign="top" bgcolor="#FFFFCC">84</td>
+    <td valign="top">&nbsp;</td>
+    <td valign="top">Define byte</td>
+    <td colspan="7" bgcolor="#FFFFCC">Assembler directive: Store 84 into RAM.</td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="240-hex-bin.htm">Previous</a> | <a href="250-FullIset.htm">Next</a> 
+</p>
+<p>&copy; C Neil Bauers 2003 </p>
+</body>
+</html>

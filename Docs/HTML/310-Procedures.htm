@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Procedures</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Procedures and Interrupts</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="300-Stack.htm">Previous</a> | <a href="320-InputOutput.htm">Next</a></p>
+<h3>Procedures and Interrupts - Flags are NOT set.</h3>
+<p>These are available in the registered version. Please register.</p>
+<p>It is essential to save the registers and flags used by any procedure or interrupt 
+  and restore them after the procedure or interrupt has finished its work. Use 
+  <strong>push and pushf</strong> to save. Use <strong>pop and popf</strong> to 
+  restore values.</p>
+<p>&nbsp;</p>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr bgcolor="#FFFFCC"> 
+    <td><strong>Assembler</strong></td>
+    <td><strong>Machine&nbsp;Code</strong></td>
+    <td><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td> CALL 30</td>
+    <td>CA 30</td>
+    <td>Call the procedure at address 30.<br>
+      The return address is pushed onto the stack and the Instruction Pointer 
+      (IP) is set to 30.<br>
+      CA is the machine instruction for CALL.<br>
+      30 is the address of the start of the procedure being called.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>RET</td>
+    <td>CB</td>
+    <td>Return from the procedure.<br>
+      Set the Instruction Pointer (IP) to the return address popped off the stack.<br>
+      CB is the machine instruction for Return.</td>
+  </tr>
+  <tr valign="top"> 
+    <td> INT 03</td>
+    <td>CC 03</td>
+    <td> The Instruction Pointer (IP) is set to the address of the interrupt vector 
+      retrieved from RAM address 03.<br>
+      The return address is pushed onto the stack.<br>
+      CC is the machine instruction for INT.<br>
+      03 is the address of the interrupt vector used by the INT command.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>IRET</td>
+    <td>CD</td>
+    <td>Return from the interrupt.<br>
+      Set the Instruction Pointer (IP) to the return address popped off the stack.<br>
+      CD is the machine instruction for IRET.</td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="300-Stack.htm">Previous</a> | <a href="320-InputOutput.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

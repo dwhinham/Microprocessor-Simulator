@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 99nasty.asm - Nasty</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 99nasty.asm - Nasty</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="100-01first.htm">Previous</a> | <a href="120-02tlight.htm">Next</a></p>
+<p>This example shows how you can create totally unreadable code. </p>
+<p>Try not to do this.</p>
+<p>This program actually works. Copy it and paste it into the simulator and try 
+  it!</p>
+<p>Click the List-File tab to see the code laid out better and to see the addresses 
+  where the code is stored.</p>
+<p>To get back to the editor window click the Source-Code tab.</p>
+<h3>Example - 99nasty.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ----- Here is how NOT to write a program -----
+_: Mov BL,C0 Mov AL,3C Q: Mov [BL],AL CMP AL,7B
+JZ Z INC AL INC BL JMP Q Z: MOV CL,40 MOV AL,20
+MOV BL,C0 Y: MOV [BL],AL INC BL DEC CL JNZ Y JMP
+_ END ; Look at the list file. It comes out OK!
+; Press Escape to stop the program running.
+; ----------------------------------------------
+</pre>
+</td>
+</tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>Here it is tidied up</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ----- A Program to display ASCII characters -----------------
+; ----- Here it is tidied up. This version is annotated. ------
+; ----- This makes it possible to understand. -----------------
+; ----- The labels have been given more readable names too. ---
+
+Start: 
+	Mov BL,C0	; Make BL point to video RAM
+	Mov AL,3C	; 3C is the ASCII code of the 'less than' symbol
+Here: 
+	Mov [BL],AL	; Copy the ASCII code in AL to the RAM location that BL is pointing to.
+	CMP AL,7B	; Compare AL with '{'
+	JZ Clear	; If AL contained '{' jump to Clear:
+	INC AL		; Put the next ASCII code into AL
+	INC BL		; Make BL point to the next video RAM location
+	JMP Here	; Jump back to Here
+Clear:
+	MOV CL,40	; We are going to repeat 40 (hex) times
+	MOV AL,20	; The ASCII code of the space character
+	MOV BL,C0 	; The address of the start of video RAM
+Loop: 
+	MOV [BL],AL	; Copy the ASCII space in AL to the video RAM that BL is pointing to.
+	INC BL		; Make BL point to the next video RAM location
+	DEC CL		; CL is counting down towards zero
+	JNZ Loop	; If CL is not zero jump back to Loop
+	JMP Start	; CL was zero so jump back to the Start and do it all again.
+	
+	END
+; -------------------------------------------------------------
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>&nbsp;</h3>
+<h3>Your Task</h3>
+<p>Write all your future programs ...</p>
+<ul>
+  <li>with good layout</li>
+  <li>with meaningful label names</li>
+  <li>with useful comments that <strong>EXPLAIN</strong> the code</li>
+  <li>avoiding comments that state the totally obvoius and just repeat the code</li>
+</ul>
+<h3>Bad Comment - just repeats the code</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INC BL ; Add one to BL</p>
+<h3>Useful Comment - explains why the step is needed</h3>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INC BL ; Make BL point to 
+  the next video RAM location</p>
+<p><a href="index.htm">Home</a> | <a href="100-01first.htm">Previous</a> | <a href="120-02tlight.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

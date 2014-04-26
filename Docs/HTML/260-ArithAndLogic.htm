@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Arithmetic and Logic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Arithmetic and Logic</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="250-FullIset.htm">Previous</a> | <a href="270-Jumps.htm">Next</a></p>
+<h2>Arithmetic Instructions - Flags are set.</h2>
+<h3>&nbsp;</h3>
+<h3>The Commands</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr valign="top" bgcolor="#FFFFCC"> 
+    <td><strong>Arithmetic</strong></td>
+    <td><strong>Logic</strong></td>
+    <td><strong>Bitwise</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Add</strong> - Addition</td>
+    <td><strong>AND</strong> - Logical AND - 1 AND 1 gives 1. Any other input 
+      gives 0.</td>
+    <td><strong>ROL</strong> - Rotate bits left. Bit at left end moved to right 
+      end.</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Sub</strong> - Subtraction</td>
+    <td><strong>OR</strong> - Logical OR - 0 OR 0 gives 0. Any other input gives 
+      1.</td>
+    <td><strong>ROR</strong> - Rotate bits right. Bit at right end moved to left 
+      end.</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Mul</strong> - Multiplication</td>
+    <td><strong>XOR</strong> - Logical exclusive OR - Equal inputs give 0. Non 
+      equal inputs give 1.</td>
+    <td><strong>SHL</strong> - Shift bits left and discard leftmost bit.</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Div</strong> - Division</td>
+    <td><strong>NOT</strong> - Logical NOT - Invert the input. 0 gives 1. 1 gives 
+      0.</td>
+    <td><strong>SHR</strong> - Shift bits right and discard rightmost bit.</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Mod</strong> - Remainder after division</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Inc</strong> - Increment (add one)</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td><strong>Dec</strong> - Decrement (subtract one)</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr valign="top">
+    <td bgcolor="#FFFFCC"> 
+      <div align="center"><strong>COMMANDS</strong></div></td>
+    <td colspan="3" bgcolor="#FFFFCC"><strong>DIRECT EXAMPLES</strong></td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>OP</strong></div></td>
+    <td bgcolor="#99FFFF"><strong>Assembler</strong></td>
+    <td bgcolor="#99FFFF"><strong>Machine Code</strong></td>
+    <td bgcolor="#99FFFF"><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>ADD</strong></div></td>
+    <td bgcolor="#99FFFF">ADD&nbsp;&nbsp;&nbsp;AL,BL</td>
+    <td bgcolor="#99FFFF">A0 00 01</td>
+    <td bgcolor="#99FFFF">Add BL to AL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>SUB</strong></div></td>
+    <td bgcolor="#99FFFF">SUB&nbsp;&nbsp;&nbsp;CL,DL</td>
+    <td bgcolor="#99FFFF">A1 02 03</td>
+    <td bgcolor="#99FFFF">Subtract DL from CL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>MUL</strong></div></td>
+    <td bgcolor="#99FFFF">MUL&nbsp;&nbsp;&nbsp;AL,CL</td>
+    <td bgcolor="#99FFFF">A2 00 02</td>
+    <td bgcolor="#99FFFF">Multiply AL by CL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>DIV</strong></div></td>
+    <td bgcolor="#99FFFF">DIV&nbsp;&nbsp;&nbsp;BL,DL</td>
+    <td bgcolor="#99FFFF">A3 01 03</td>
+    <td bgcolor="#99FFFF">Divide BL by DL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>MOD</strong></div></td>
+	<td bgcolor="#99FFFF">MOD&nbsp;&nbsp;&nbsp;DL,BL</td>
+	<td bgcolor="#99FFFF">A6 03 01</td>
+	<td bgcolor="#99FFFF">Remainder after dividing DL by BL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>INC</strong></div></td>
+	<td bgcolor="#99FFFF">INC&nbsp;&nbsp;&nbsp;AL</td>
+	<td bgcolor="#99FFFF">A4 00</td>
+	<td bgcolor="#99FFFF">Add one to AL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>DEC</strong></div></td>
+	<td bgcolor="#99FFFF">DEC&nbsp;&nbsp;&nbsp;BL</td>
+	<td bgcolor="#99FFFF">A5 01</td>
+	<td bgcolor="#99FFFF">Deduct one from BL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>AND</strong></div></td>
+	<td bgcolor="#99FFFF">AND&nbsp;&nbsp;&nbsp;CL,AL</td>
+	<td bgcolor="#99FFFF">AA 02 00</td>
+	<td bgcolor="#99FFFF">CL becomes CL AND AL</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>OR</strong></div></td>
+	<td bgcolor="#99FFFF">OR&nbsp;&nbsp; &nbsp;CL,DL</td>
+	<td bgcolor="#99FFFF">AB 02 03</td>
+	<td bgcolor="#99FFFF">CL becomes CL OR DL</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>XOR</strong></div></td>
+	<td bgcolor="#99FFFF">XOR&nbsp;&nbsp;&nbsp;BL,AL</td>
+	<td bgcolor="#99FFFF">AC 01 00</td>
+	<td bgcolor="#99FFFF">BL becomes BL XOR AL</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>NOT</strong></div></td>
+	<td bgcolor="#99FFFF">NOT&nbsp;&nbsp;&nbsp;CL</td>
+	<td bgcolor="#99FFFF">AD 02</td>
+	<td bgcolor="#99FFFF">Invert the bits in CL</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>ROL</strong></div></td>
+	<td bgcolor="#99FFFF">ROL&nbsp;&nbsp;&nbsp;DL</td>
+	<td bgcolor="#99FFFF">9A 03</td>
+	<td bgcolor="#99FFFF">Bits in DL rotated one place left</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>ROR</strong></div></td>
+	<td bgcolor="#99FFFF">ROR&nbsp;&nbsp;&nbsp;AL</td>
+	<td bgcolor="#99FFFF">9B 00</td>
+	<td bgcolor="#99FFFF">Bits in AL rotated one place right</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>SHL</strong></div></td>
+	<td bgcolor="#99FFFF">SHL&nbsp;&nbsp;&nbsp;BL</td>
+	<td bgcolor="#99FFFF">9C 01</td>
+	<td bgcolor="#99FFFF">Bits in BL shifted one place left</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>SHR</strong></div></td>
+	<td bgcolor="#99FFFF">SHR&nbsp;&nbsp;&nbsp;CL</td>
+	<td bgcolor="#99FFFF">9D 02</td>
+	<td bgcolor="#99FFFF">Bits in CL shifted one place right</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>COMMANDS</strong></div></td>
+    <td colspan="3" bgcolor="#99FFFF"><strong>IMMEDIATE EXAMPLES</strong></td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>OP</strong></div></td>
+    <td bgcolor="#99FFFF"><strong>Assembler</strong></td>
+    <td bgcolor="#99FFFF"><div align="left"><strong>Machine Code</strong></div></td>
+    <td bgcolor="#99FFFF"><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>ADD</strong></div></td>
+    <td bgcolor="#99FFFF">ADD&nbsp;&nbsp;&nbsp;AL,15</td>
+    <td bgcolor="#99FFFF"><div align="left">B0 00 15</div></td>
+    <td bgcolor="#99FFFF">Add 15 to AL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>SUB</strong></div></td>
+    <td bgcolor="#99FFFF">SUB&nbsp;&nbsp;&nbsp;BL,05</td>
+    <td bgcolor="#99FFFF"><div align="left">B1 01 05</div></td>
+    <td bgcolor="#99FFFF">Subtract 5 from BL</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>MUL</strong></div></td>
+    <td bgcolor="#99FFFF">MUL&nbsp;&nbsp;&nbsp;AL,10</td>
+    <td bgcolor="#99FFFF"><div align="left">B2 00 10</div></td>
+    <td bgcolor="#99FFFF">Multiply AL by 10</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center"><strong>DIV</strong></div></td>
+    <td bgcolor="#99FFFF">DIV&nbsp;&nbsp;&nbsp;BL,04</td>
+    <td bgcolor="#99FFFF"><div align="left">B3 01 04</div></td>
+    <td bgcolor="#99FFFF">Divide BL by 4</td>
+  </tr><tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>MOD</strong></div></td>
+	<td bgcolor="#99FFFF">MOD&nbsp;&nbsp;&nbsp;DL,20</td>
+	<td bgcolor="#99FFFF"><div align="left">B6 03 20</div></td>
+	<td bgcolor="#99FFFF">Remainder after dividing DL by 20</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>AND</strong></div></td>
+	<td bgcolor="#99FFFF">AND&nbsp;&nbsp;&nbsp;CL,55</td>
+	<td bgcolor="#99FFFF"><div align="left">BA 02 55</div></td>
+	<td bgcolor="#99FFFF">CL becomes CL AND 55 (01010101)</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>OR</strong></div></td>
+	<td bgcolor="#99FFFF">OR&nbsp;&nbsp; &nbsp;CL,AA</td>
+	<td bgcolor="#99FFFF"><div align="left">BB 02 AA</div></td>
+	<td bgcolor="#99FFFF">CL becomes CL OR AA (10101010)</td>
+  </tr>
+  <tr valign="top">
+	<td bgcolor="#CCFFFF"><div align="center"><strong>XOR</strong></div></td>
+	<td bgcolor="#99FFFF">XOR&nbsp;&nbsp;&nbsp;BL,F0</td>
+	<td bgcolor="#99FFFF"><div align="left">BC 01 F0</div></td>
+	<td bgcolor="#99FFFF">BL becomes BL XOR F0</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<h3> Examples</h3>
+<p>ADD&nbsp;&nbsp;&nbsp; CL,AL - Add CL to AL and put the answer into CL.</p>
+<p>ADD&nbsp;&nbsp;&nbsp;&nbsp;AL,22 - Add 22 to AL and put the answer into AL.</p>
+<p>The answer always goes into the first register in the command.</p>
+<p><img src="100right-to-left.PNG" alt="Data Movement Direction Image" width="260" height="145"></p>
+<p>DEC&nbsp;&nbsp; &nbsp;BL - Subtract one from BL and put the answer into BL.</p>
+<p>The other commands all work in the same way. </p>
+<h3>Flags</h3>
+<p> If a calculation gives a zero answer, set the Z zero flag.<br>
+  If a calculation gives a negative answer, set the S sign flag.<br>
+  If a calculation overflows, set the O overflow flag.</p>
+<p>An overflow happens if the result of a calculation has more bits than will 
+  fit into the available register. With 8 bit registers, the largest numbers that 
+  fit are -128 to + 127. </p>
+<p><a href="index.htm">Home</a> | <a href="250-FullIset.htm">Previous</a> | <a href="270-Jumps.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

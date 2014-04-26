@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Truth Tables and Logic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Truth Tables and Logic</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="370-Pop-up-help.htm">Previous</a> | 
+  <a href="390-TheEditor.htm">Next</a></p>
+
+<h3>Boolean Operators - Flags are Set</h3>
+<p>A mathematician called Bool invented a branch of maths for processing true 
+  and false values instead of numbers. This is called Boolean Algebra. Simple 
+  Boolean algebra is consistent with common sense but if you need to process decisions 
+  involving many values that might be true or false according to complex rules, 
+  you need this branch of mathematics. </p>
+<h3>The Rules</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td bgcolor="#FFFFCC"><strong>Rule</strong></td>
+    <td bgcolor="#FFFFCC"><strong>One Line Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>AND </strong></div></td>
+    <td>1 AND 1 gives 1. Any other input gives 0.</td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>NAND</strong></div></td>
+    <td> (NOT AND) 1 AND 1 gives 0. Any other input gives 1.</td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>OR </strong></div></td>
+    <td>0 OR 0 gives 0. Any other input gives 1.</td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>NOR</strong></div></td>
+    <td> (NOT OR) 0 OR 0 gives 1. Any other input gives 0.</td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>XOR</strong></div></td>
+    <td> Equal inputs give 0. Non equal inputs give 1.</td>
+  </tr>
+  <tr> 
+    <td><div align="center"><strong>NOT</strong></div></td>
+    <td> Invert input bits. 0 becomes 1. 1 becomes 0.</td>
+  </tr>
+</table>
+<p>Computers work using LOGIC. Displaying graphics such as the mouse cursor involves 
+  the XOR (Exclusive OR) command. Addition makes use of AND and XOR. These and 
+  a few of the other uses of logic are described below.</p>
+<h3>Truth Tables</h3>
+<p>The one line descriptions of the rules above are clearer if shown in Truth 
+  Tables. These tables show the output for all possible input conditions.</p>
+<hr>
+<h3>Logic Gates</h3>
+<p>Logic gates are the building blocks of microcomputers. Modern processors contain 
+  millions of gates. Each gate is built from a few transistors. The gates are 
+  used to store data, perform arithmetic and manipulate bits using the rules above. 
+  The XOR rule can be used to test bits for equality.</p>
+<hr>
+<h3>AND</h3>
+<p><img src="380-and.PNG" alt="AND Gate Image" width="127" height="55"></p>
+<p>Both inputs must be true for the output to be true. AND is used for addition 
+  and decision making.</p>
+<pre>
+ -----------
+  A B Output
+ -----------
+  0 0    0
+  0 1    0
+  1 0    0
+  1 1    1
+</pre>
+<hr>
+<h3>OR</h3>
+<p><img src="380-or.PNG" alt="OR Gate Image" width="127" height="58"></p>
+<p>Both inputs must be false for the output to be false. OR is used in decision 
+  making. Both AND and OR are used for Bit Masking. Bit masking is used to pick 
+  individual bits out of a byte or to set particular bits in a byte. OR is used 
+  to set bits to one. AND is used to set bits to nought. AND is used to test if 
+  bits are one. OR is used to test if bits are nought.</p>
+<pre>
+ -----------
+  A B Output
+ -----------
+  0 0    0
+  0 1    1
+  1 0    1
+  1 1    1
+</pre>
+<hr>
+<h3> XOR </h3>
+<p><img src="380-xor.PNG" alt="XOR Gate Image" width="128" height="55"></p>
+<p>If the bits in a graphical image are XORed with other bits a new image appears. 
+  If the XORing is repeated the image disappears again. This is how the mouse 
+  and text cursors get moved around the screen. XOR is combined with AND for use 
+  in addition. XOR detects if the inputs are equal or not.</p>
+<pre>
+ -----------
+  A B Output
+ -----------
+  0 0    0
+  0 1    1
+  1 0    1
+  1 1    0
+</pre>
+<hr>
+<h3>NAND</h3>
+<p><img src="380-nand.PNG" alt="NAND Gate Image" width="123" height="58"></p>
+<p>NAND is really AND followed by NOT. Electronic circuits are commonly built 
+  from NAND gates (circuits). Computer programming languages and this simulator 
+  do not provide NAND. Use NOT AND instead.</p>
+<pre>
+ -----------
+  A B Output
+ -----------
+  0 0    1
+  0 1    1
+  1 0    1
+  1 1    0
+</pre>
+<hr>
+<h3> NOR</h3>
+<p><img src="380-nor.PNG" alt="NOR Gate Image" width="134" height="54"></p>
+<p>NOR is really OR followed by NOT. Electronic circuits are commonly built from 
+  NOR gates (circuits). Computer programming languages and this simulator do not 
+  provide NOR. Use NOT OR instead.</p>
+<pre>
+ -----------
+  A B Output
+ -----------
+  0 0    1
+  0 1    0
+  1 0    0
+  1 1    0
+</pre>
+<hr>
+<h3>NOT</h3>
+<p><img src="380-not.PNG" alt="NOT Gate Image" width="128" height="63"></p>
+<p>NOT is used to invert bits or True/False values. All the rules above had two 
+  inputs and one output. NOT has a single input and output.</p>
+<pre>
+ -----------
+  A  Output
+ -----------
+  0     1
+  1     0
+</pre>
+<hr>
+<h3> The Half Adder Truth Table</h3>
+<p><img src="380-halfAdder.PNG" alt="Half Adder Circuit Diagram" width="196" height="97"> </p>
+<p>The half adder does binary addition on two bits.<br>
+  The AND gate conputes the carry bit. <br>
+  The XOR gate computes the sum bit.</p>
+<p><br>
+  0 + 0 = 0, carry 0<br>
+  0 + 1 = 1, carry 0<br>
+  1 + 0 = 1, carry 0<br>
+  1 + 1 = 0, carry 1</p>
+<p>&nbsp;</p>
+<pre>
+ ------------------
+  A B   SUM  CARRY
+ ------------------
+  0 0    0     0
+  0 1    1     0
+  1 0    1     0
+  1 1    0     1
+</pre>
+<hr>
+<p><a href="index.htm">Home</a> | <a href="370-Pop-up-help.htm">Previous</a> | 
+  <a href="390-TheEditor.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Move Instructions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Move Instructions</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="270-Jumps.htm">Previous</a> | <a href="290-Compare.htm">Next</a></p>
+<h3>Move Instructions - Flags are NOT set.</h3>
+<p>Move instructions are used to copy data between registers and between RAM and 
+  registers.</p>
+<table border="1" cellpadding="2" cellspacing="0" bgcolor="#CCFFFF">
+  <tr valign="top" bgcolor="#FFFFCC"> 
+    <td><strong>Addressing&nbsp;Mode </strong></td>
+    <td><strong>Assembler&nbsp;Example</strong></td>
+    <td><strong>Supported</strong></td>
+    <td><strong>Explanation</strong></td>
+  </tr>
+  <tr> 
+    <td>Immediate</td>
+    <td>mov al,10</td>
+    <td><div align="center">YES</div></td>
+    <td>Copy 10 into AL</td>
+  </tr>
+  <tr> 
+    <td>Direct (register)</td>
+    <td>mov al,bl</td>
+    <td><div align="center">NO</div></td>
+    <td>Copy BL into AL</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2">Direct (memory)</td>
+    <td>mov al,[50]</td>
+    <td> <div align="center">YES</div></td>
+    <td>Copy data from RAM at address 50 into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>mov [40],cl</td>
+    <td> <div align="center">YES</div></td>
+    <td>Copy data from CL into RAM at address 40.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2">Indirect</td>
+    <td>mov al,[bl]</td>
+    <td> <div align="center">YES</div></td>
+    <td>BL is a pointer to a RAM location. Copy data from that RAM location into 
+      AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td> mov [cl],dl</td>
+    <td> <div align="center">YES</div></td>
+    <td>CL is a pointer to a RAM location. Copy data from DL into that RAM location.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2">Indexed</td>
+    <td>mov al,[20 + bl]</td>
+    <td><div align="center">NO</div></td>
+    <td>A data table is held in RAM at address 20. BL indexes a data item within 
+      the data table. Copy from the data table at address 20+BL into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>mov [20 + bl],al</td>
+    <td><div align="center">NO</div></td>
+    <td>A data table is held in RAM at address 20. BL indexes a data item within 
+      the data table. Copy from AL into the data table at address 20+BL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2">Base Register</td>
+    <td>mov al,[bl+si]</td>
+    <td><div align="center">NO</div></td>
+    <td>BL points to a data table in memory. SI indexes to a record inside the 
+      data table. BL is called the &quot;base register&quot;. SI is called the 
+      &quot;offset or index&quot;. Copy from RAM at address BL+SI into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>mov [bl+si],al</td>
+    <td><div align="center">NO</div></td>
+    <td>BL points to a data table in memory. SI indexes to a record inside the 
+      data table. BL is called the &quot;base register&quot;. SI is called the 
+      &quot;offset&quot;. Copy from AL into RAM at address BL+SI.</td>
+  </tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>Right to Left Convention</h3>
+<p><img src="100right-to-left.PNG" alt="Data Movement Direction Image" width="260" height="145"></p>
+<h1>&nbsp;</h1>
+<h1>ADDRESSING MODES</h1>
+<h3>&nbsp;</h3>
+<h3>Immediate</h3>
+<p>MOV AL,10</p>
+<p>Copy a number into a register. This is the simplest move command and easy to 
+  understand.</p>
+<h3>Direct (register)</h3>
+<p>MOV AL,BL</p>
+<p>Copy one register into another. This is easy to understand. The simulator does 
+  not support this command. If you have to copy from one register to another, 
+  use a RAM location or the stack to achieve the move.</p>
+<h3>Direct (memory)</h3>
+<p>MOV AL,[50]&nbsp;&nbsp;&nbsp;&nbsp;; Copy from RAM into AL. Copy the data from 
+  address 50.<br>
+  MOV [50],AL&nbsp;&nbsp;&nbsp;&nbsp;; Copy from AL into RAM. Copy the data to 
+  address 50.</p>
+<p>The square brackets indicate data in RAM. The number in the square brackets 
+  indicates the RAM address/location of the data.</p>
+<h3>Indirect</h3>
+<p>MOV AL,[BL]&nbsp;&nbsp;&nbsp;&nbsp;; Copy from RAM into AL. Copy from the address 
+  that BL points to.<br>
+  MOV [BL],AL&nbsp;&nbsp;&nbsp;&nbsp;; Copy from AL into RAM. Copy to the address 
+  that BL points to.</p>
+<p>Copy between a specified RAM location and a register. The square brackets indicate 
+  data in RAM. In this example BL points to RAM.</p>
+<h3>Indexed</h3>
+<p>MOV AL,[20 + BL]&nbsp;&nbsp;&nbsp;&nbsp;; Copy from RAM into AL. The RAM address 
+  is located at 20+BL.<br>
+  MOV [20 + BL],AL&nbsp;&nbsp;&nbsp;&nbsp;; Copy from AL into RAM. The RAM address 
+  is located at 20+BL.</p>
+<p>Here the BL register is used to &quot;index&quot; data held in a table. The 
+  table data starts at address 20.</p>
+<h3>Base Register</h3>
+<p>MOV AL,[BL+SI]&nbsp;&nbsp;&nbsp;&nbsp;; Copy from RAM into AL. The RAM address 
+  is located at BL+SI.<br>
+  MOV [BL+SI],AL&nbsp;&nbsp;&nbsp;&nbsp;; Copy from AL into RAM. The RAM address 
+  is located at BL+SI.</p>
+<p>BL is the &quot;base register&quot;. It holds the start address of a data table. 
+  SI is the &quot;source index&quot;. It is used to index a record in the data 
+  table. </p>
+<p><a href="index.htm">Home</a> | <a href="270-Jumps.htm">Previous</a> | <a href="290-Compare.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

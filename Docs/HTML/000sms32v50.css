@@ -1,0 +1,84 @@
+body
+{
+	margin-bottom : 0;
+	margin-left : 0;
+	margin-right : 0;
+	margin-top : 0;
+	font-family : Verdana, Arial, Default;
+	background-color : #ddeeff;
+}
+
+h1
+{
+	font-size : 18pt;
+	margin : 0 0 0 0;
+	padding : 0 5px 2px 5px;
+}
+
+h2
+{
+	font-size : 16pt;
+	margin : 0 0 0 0;
+	padding : 0 5px 2px 5px;
+}
+
+h3
+{
+	font-size : 14pt;
+	margin : 0 0 0 0;
+	padding : 0 5px 2px 5px;
+}
+
+h4
+{
+	font-size : 13pt;
+	margin : 0 0 0 0;
+	padding : 0 5px 2px 5px;
+}
+
+P, LI
+{
+	font-size : 10pt;
+	padding : 0px 5px 0px 5px;
+	margin-bottom : 10px;
+	margin-top : 10px;
+}
+
+td
+{
+	font-size : 10pt;
+}
+
+A
+{
+	font-size : 10pt;
+	color : Blue;
+	font-weight : bold;
+	text-decoration: none;
+}
+
+A:hover
+{
+	font-size : 10pt;
+	color : Red;
+	font-weight : bold;
+	text-decoration: none;
+}
+
+A:link
+{
+	font-size : 10pt;
+	color : Green;
+	font-weight : bold;
+	text-decoration: none;
+}
+
+form
+{
+	margin : 0 0 0 0;
+}
+
+.red
+{
+  color:#FF0000;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 01first.asm - Arithmetic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 01first.asm - Arithmetic</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="090learning-tasks.htm">Previous</a> | 
+  <a href="110-99nasty.htm">Next</a></p>
+<p> Most of these examples include a learning task. Study the example and if you 
+  can complete the task/s, it is likely that your understanding is good.</p>
+<h3>Example - 01first.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+  <tr>
+    <td bgcolor="#ccddee">
+<pre>
+
+; ===== WORK OUT 2 PLUS 2 ======================================
+	CLO		; Close unwanted windows.
+	MOV AL,2	; Copy a 2 into the AL register.
+	MOV BL,2	; Copy a 2 into the BL register.
+	ADD AL,BL	; Add AL to BL. Answer goes into AL.
+	END		; Program ends
+; ===== Program Ends ===========================================
+
+	YOUR TASK
+	=========
+	Use SUB, DIV and MUL to subtract, divide and multiply.
+	What happens if you divide by zero?
+	Make use of CL and DL as well as AL and BL.
+</pre>
+</td>
+</tr>
+</table>
+<p>Type this code into the simulator editor <strong>OR</strong> copy and paste 
+  the code <strong>OR</strong> load the example from disk.</p>
+<p>Step through the program by pressing <strong>Alt+P</strong> repeatedly.</p>
+<p>While you are stepping, watch the CPU registers. You should see a '2' appear 
+  in the AL register followed by a '2' in the BL register. AL should be added 
+  to BL and a '4' should appear in AL. The altered registers are highlighted yellow.</p>
+<p>Watch the register labelled IP (Instruction Pointer). This register keeps track 
+  of where the processor has got to in the program. If you look at the RAM display, 
+  one RAM location is labelled with a red blob. This corresponds to the Instruction 
+  Pointer. Note how the red blob (IP) moves when you step the program.</p>
+<p>When doing the learning exercises, add to and modify your own copy of the example.</p>
+<h3> What you need to know</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+  <tr> 
+    <td><h4>Comments</h4></td>
+    <td><p>Any text after a semicolon is not part of the program and is ignored 
+        by the simulator. These comments are used for explanations of what the 
+        program is doing. Good programmers make extensive use of comments. Good 
+        comments should not just repeat the code. Good comments should explain 
+        <strong>why</strong> things are begin done.</p></td>
+  </tr>
+  <tr> 
+    <td><h4>CLO</h4></td>
+    <td><p>The CLO command is unique to this simulator. It closes any window that 
+        is not needed while a program is running. This command makes it easier 
+        to write nice demonstration programs. It also avoids having to close several 
+        windows manually. </p></td>
+  </tr>
+  <tr> 
+    <td><h4>MOV</h4></td>
+    <td><p>The MOV command is short for Move. In this example numbers are being 
+        copied into registers where arithmetic can be done. MOV copies data from 
+        one location to another. The data in the original location is left intact 
+        by the MOV command. Move was shortened to Mov because, in olden times, 
+        computer memory was fiendishly expensive. Every command was shortened 
+        as much as possible, much like the mobile phone texting language used 
+        today.</p></td>
+  </tr>
+  <tr> 
+    <td><h4>ADD</h4></td>
+    <td><h4>Arithmetic</h4>
+      <p>The add command comes in two versions. Here are two examples</p>
+      <p><strong>ADD AL,BL</strong> - Add BL to AL and store the result into AL</p>
+      <p><strong>ADD AL,5</strong> - Add 5 to AL and store the result into AL</p>
+      <p>y</p>
+      <p>Look at the on-line help to find out about SUB, MUL and DIV. Remeber 
+        that you can access on-line help by pressing the <strong>F1</strong> key.</p></td>
+  </tr>
+  <tr> 
+    <td><h4>Registers </h4></td>
+    <td><p>Registers are storage locations where 8 bit binary numbers are stored. 
+        The central processing unit in this simulator has four general purpose 
+        registers called AL, BL, CL and DL. These registers are interchangeable 
+        and can, with a few exceptions, be used for any purpose.</p>
+      <p>Newer central processing unit (CPU) chips have 16, 32 or even 64 bit 
+        registers. These work in the same way but more data can be moved in one 
+        step so there is a speed advantage. </p>
+      <p>Wider registers can store larger integer (whole) numbers. This simplifies 
+        many programming tasks. The other three registers SP, IP and SR are described 
+        later. </p></td>
+  </tr>
+  <tr> 
+    <td><h4>Hexadecimal Numbers </h4></td>
+    <td><p>In the command MOV AL,2 the 2 is a hexadecimal number. The hexadecimal 
+        number system is used in low level programming because there is a very 
+        convenient conversion between binary and hex. Study the <a href="240-hex-bin.htm">Hexadecimal 
+        and Binary</a> number systems.</p></td>
+  </tr>
+  <tr> 
+    <td><h4>END </h4></td>
+    <td><p>The last command in all programs should be END. Any text after the 
+        END keyword is ignored.</p></td>
+  </tr>
+</table>
+<h3>&nbsp;</h3>
+<h3>Your Tasks</h3>
+<p>Use all the registers AL, BL, CL and DL and experiment with ADD, SUB, MUL and 
+  DIV.</p>
+<p>Find out what happens if you try to divide by zero.</p>
+<p> <a href="index.htm">Home</a> | <a href="090learning-tasks.htm">Previous</a> | 
+  <a href="110-99nasty.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

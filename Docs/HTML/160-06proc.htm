@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 06proc.asm - Procedures</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 06proc.asm - Procedures</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="150-05keyb-in.htm">Previous</a> | <a href="170-07textio.htm">Next</a></p>
+<h3>Example - 06proc.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ---------------------------------------------------------------
+
+;  A general purpose time delay procedure.
+
+;  The delay is controlled by the value in AL.
+
+;  When the procedure terminates, the CPU registers are
+;  restored to the same values that were present before 
+;  the procedure was called. Push, Pop, Pushf and Popf
+;  are used to achieve this.  In this example one procedure 
+
+;  is re-used three times.  This re-use is one of the main 
+;  advantages of using procedures.
+
+;------ The Main Program ----------------------------------------
+Start:
+	MOV	AL,8	; A short delay.
+	CALL	30	; Call the procedure at address [30]
+
+	MOV	AL,10	; A middle sized delay.
+	CALL	30	; Call the procedure at address [30]
+
+	MOV	AL,20	; A Longer delay.
+	CALL	30	; Call the procedure at address [30]
+
+JMP	Start	; Jump back to the start.
+
+; ----- Time Delay Procedure Stored At Address [30] -------------
+	ORG	30	; Generate machine code from address [30]
+
+	PUSH	AL	; Save AL on the stack.
+	PUSHF		; Save the CPU flags on the stack.
+Rep:
+	DEC	AL	; Subtract one from AL.
+	JNZ	REP	; Jump back to Rep if AL was not Zero.
+
+	POPF		; Restore the CPU flags from the stack.
+	POP	AL	; Restore AL from the stack.
+
+	RET		; Return from the procedure.
+; ---------------------------------------------------------------
+	END
+; ---------------------------------------------------------------
+
+TASK
+
+15)	Re-do the traffic lights program and use this procedure 
+	to set up realistic time delays.  02tlight.asm
+
+16)	Re-do the text input and display program with procedures.
+	Use one procedure to input the text and one to display it. 
+
+; ---------------------------------------------------------------
+</pre>
+</td>
+</tr>
+</table>
+<p>You can copy this example program from the help page and paste it into the 
+  source code editor.</p>
+<h3><br>
+  MOV AL,8</h3>
+<p>A value is placed into the AL register before calling the time delay procedure. 
+  This value determines the length of the delay.</p>
+<h3> CALL 30</h3>
+<p>Call the procedure at address [30]. This alters the instruction pointer IP 
+  to [30] and the program continues to run from that address. When the CPU reaches 
+  the RET command it returns to the address that it came from. This return address 
+  is saved on the stack.</p>
+<h3>Stack</h3>
+<p>This is a region in memory where values are saved and restored. The stack uses 
+  the Last In First Out rule. LIFO. The CALL command saves the return address 
+  on the stack. The RET command gets the saved value from the stack and jumps 
+  to that address by setting IP.</p>
+<h3> ORG 30</h3>
+<p>Origin at address [30]. ORG specifies at what RAM address machine code should 
+  be generated. The time delay procedure is stored at address [30].</p>
+<h3>PUSH AL</h3>
+<p>Save the value of AL onto the stack. The CPU stack pointer SP points to the 
+  next free stack location. The push command saves a value at this position. SP 
+  is then moved back one place to the next free position. In this simulator, the 
+  stack grows towards address Zero. A stack overflow occurs if the stack tries 
+  to fill more than the available memory. A stack underflow occurs if you try 
+  to pop an empty stack.</p>
+<h3> PUSHF</h3>
+<p>Save the CPU flags in the status register SR onto the stack. This ensures that 
+  the flags can be put back as they were when the procedure completes. The stack 
+  pointer is moved back one place. See the Push command. <strong>NOTE:</strong> 
+  Items must be popped in the reverse order they were pushed.</p>
+<h3>DEC AL</h3>
+<p>Subtract one from AL. This command sets the Z flag if the answer was Zero or 
+  the S flag if the answer was negative.</p>
+<h3> JNZ REP</h3>
+<p>Jump Not Zero to the address that Rep marks. Jump if the Z flag is not set.</p>
+<h3> POPF</h3>
+<p>Restore the CPU flags from the stack. Increase the stack pointer by one.</p>
+<h3> POP AL</h3>
+<p>Restore the AL register from the stack. This is done by first moving the stack 
+  pointer SP forward one place and copying the value at that stack position into 
+  the AL register. A stack underflow occurs when an attempt is made to pop more 
+  items off the stack than were present. <strong>NOTE:</strong> Items must be 
+  popped in the reverse order they were pushed.</p>
+<h3>RET</h3>
+<p>Return from the procedure to the address that was saved on the stack by the 
+  CALL command. Procedures can re-use themselves. This is called recursion. It 
+  is a powerful technique and dangerous if you don't understand what is happening! 
+  Accidental or uncontrolled recursion causes the stack to grow until it overwrites 
+  the program or overflows.</p>
+<p><a href="index.htm">Home</a> | <a href="150-05keyb-in.htm">Previous</a> | <a href="170-07textio.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 05keyb-in.asm - Keyboard Input</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 05keyb-in.asm - Keyboard Input</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="140-04IncJmp.htm">Previous</a> | <a href="160-06proc.htm">Next</a></p>
+<h3>Example - 05keyb-in.asm</h3>
+<p><img src="150-keybin.PNG" alt="Waiting for Keyboard Input Image" width="799" height="234"></p>
+<p>&nbsp;</p>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; --------------------------------------------------------------
+;  Input key presses from the keyboard until Enter is pressed.
+; --------------------------------------------------------------
+	CLO		; Close unwanted windows.
+Rep:
+	IN	00	; Wait for key press - Store it in AL.
+	CMP	AL,0D	; Was it the Enter key? (ASCII 0D)
+	JNZ	Rep	; No - jump back.  Yes - end.
+
+END
+; --------------------------------------------------------------
+TASK
+
+11)	Easy!  Display each character at the top left position of the 
+	VDU by copying them all to address [C0].
+
+12)	Harder  Use BL to point to address [C0] and increment BL after 
+	each key press in order to see the text as you type it.
+
+13)	Harder!  Store all the text you type in RAM when you type it in.  
+	When you press Enter, display the stored text on the VDU display.
+
+14)	Difficult  Type in text and store it.  When Enter is pressed, 
+	display it on the VDU screen in reverse order.  Using the stack 
+	makes this task easier.
+</pre>
+</td>
+</tr>
+</table>
+<p>You can copy this example program from the help page and paste it into the 
+  source code editor.</p>
+<h3> IN 00</h3>
+<p>Input from port zero. In this simulator, port zero is wired to the keyboard 
+  hardware. The simulator waits for a key press and copies the ASCII code of the 
+  key press into the AL register. This is not very realistic but is easy to program. 
+  There is a more realistic keyboard on port 07 and interrupt 03 but this is for 
+  more advanced programmers.</p>
+<h3> CMP AL,0D</h3>
+<p>Compare the AL register with the ASCII code of the Enter key. The ASCII code 
+  of the Enter key is 0Dhex. </p>
+<p>CMP AL,BL works as follows. The processor calculates AL - BL. If the result 
+  is zero, the 'Z' flag in the status register SR is set. If the result is negative, 
+  the 'S' flag is set. If the result is positive, no flags are set. The 'Z' flag 
+  is set if AL and BL are equal. The 'S' flag is set if BL is greater then AL. 
+  No flag is set if AL is greater than BL. </p>
+<h3> JNZ Rep</h3>
+<p>JNZ stands for Jump Not Zero. Jump if the 'Z' flag is not set. The program 
+  will jump forwards or back to the address that Rep marks.</p>
+<p>A related command is JZ. This stands for Jump Zero. Jump if the zero flag is 
+  set. In this program, the CMP command sets the flags. Arithmetic commands also 
+  set the status flags.</p>
+<h3> MOV [C0],AL</h3>
+<p>This will copy AL to address [C0]. The visual display unit works with addresses 
+  [C0] to [FF]. This gives a display with 4 rows and 16 columns. Address [C0] 
+  is the top left corner of the screen.</p>
+<h3>MOV [BL],AL</h3>
+<p>This copies AL to the address that BL points to. BL can be made to point to 
+  the VDU screen at [C0] by using MOV BL,C0. BL can be made to point to each screen 
+  position in turn by using INC BL. This is needed for task 2.</p>
+<p><a href="index.htm">Home</a> | <a href="140-04IncJmp.htm">Previous</a> | <a href="160-06proc.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

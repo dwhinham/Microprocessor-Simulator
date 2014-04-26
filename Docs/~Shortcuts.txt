@@ -1,0 +1,61 @@
+F1	Help
+
+===
+ALT
+===
+A	Assemble
+B	
+C	Configuration
+D	
+E	Edit
+F	File
+G	loG
+H	Help (Menu)
+I	lIst file
+J
+K	toKens
+L	sLower
+M	show raM
+N	coNtinue
+O	stOp
+P	steP
+Q
+R	Run
+S	reSet	
+T	fasTer
+U	soUrce code
+V	View
+W
+X	eXamples
+Y
+Z
+
+====
+CRTL
+====
+A	Select All	
+B
+C	Copy
+D
+E
+F	Find
+G
+H
+I
+J
+K
+L
+M
+N
+O	Open
+P
+Q
+R	Replace
+S	Save
+T
+U
+V	Paste
+W
+X	Cut
+Y
+X

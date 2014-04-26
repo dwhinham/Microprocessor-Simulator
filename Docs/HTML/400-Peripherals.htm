@@ -1,0 +1,511 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Using the Peripherals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Virtual Peripherals</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="390-TheEditor.htm">Previous</a> | <strong>Next</strong></p>
+
+<h3>Using the Peripheral Devices</h3>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Keyboard<br>
+      Port 07<br>
+      INT 03</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-keyboard.PNG" alt="Virtual Keyboard Layout Image" width="436" height="187"></td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#FFFF99"><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td> This is one of the more complex devices. To make the keyboard visible, 
+      use <strong>OUT 07</strong>. Every time a key is pressed, a hardware interrupt, 
+      <strong>INT 03</strong> is generated. By default, the CPU will ignore this 
+      interrupt. To process the interrupt, at the start of the program, use the 
+      <strong>STI</strong> command to set the interrupt flag (I) in the CPU status 
+      register (SR). Place an interrupt vector at RAM address <strong>03</strong>. 
+      This should point to your interrupt handler code. The interrupt handler 
+      should use <strong>IN 07</strong> to read the key press into the <strong>AL</strong> 
+      register.<br>
+      <br>
+      Once <strong>STI</strong> has set the (I) flag in the status register (SR), 
+      interrupts from the hardware timer will also be generated. These must be 
+      processed too. The hardware timer generates <strong>INT 02</strong>. To 
+      process this interrupt, place an interrupt vector at RAM location <strong>02</strong>. 
+      This should point to the timer interrupt handler code. The timer code can 
+      be as simple as <strong>IRET</strong>. This will cause an interrupt return 
+      without doing any other processing. 
+      <pre>
+	jmp	start
+	db	10	; Hardware Timer Interrupt Vector
+	db	20	; Keyboard Interrupt Vector
+
+; ===== Hardware Timer =======
+	org	10
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	iret
+; ============================
+
+; ===== Keyboard Handler =====
+	org	20
+	CLI		; Prevent re-entrant use
+	push	al
+	pushf
+
+	in	07
+	nop		; Process the key press here
+	nop
+	nop
+	nop
+	nop
+
+	popf
+	pop	al
+	STI
+	iret
+; ============================
+
+; ===== Idle Loop ============
+start:
+	STI		; Set (I) flag
+	out	07	; Make keyboard visible
+idle:
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	jmp	idle
+; ============================
+	end
+; ============================
+</pre>
+	</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Visual Display Unit<br>
+      Memory Mapped</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-vdu.PNG" alt="Simulated VDU Image" width="199" height="95"></td>
+    <td><p>The Visual Display Unit (VDU) is memory mapped. This means that RAM 
+        locations correspond to positions on the screen. RAM location C0 maps 
+        to the top left corner of the VDU. The screen has 16 columns and four 
+        rows mapped to RAM locations C0 to FF. When you write ASCII codes to these 
+        RAM locations, the corresponting text characters appear and the VDU is 
+        made visible. This device, when combined with a keyboard, is sometimes 
+        called a dumb terminal. It has no graphics capabilities. Here is a code 
+        snippet to write text to the screen.</p>
+<pre>
+; ===== Memory Mapped VDU =====================================================
+	MOV	AL,41	; ASCII code of 'A'
+	MOV	[C0],AL	; RAM location mapped to the top left corner of the VDU
+	MOV	AL,42	; ASCII code of 'B'
+	MOV	[C1],AL	; RAM location mapped to the VDU
+	MOV	AL,43	; ASCII code of 'C'
+	MOV	[C2],AL	; RAM location mapped to the VDU
+	
+	END
+; =============================================================================
+</pre> </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Traffic Lights<br>
+      Port 01</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-tlight.PNG" alt="Traffic Lights Image" width="206" height="250"></td>
+    <td><p>The traffic lights are connected to Port 01. If a byte of data is sent 
+        to this port, wherever there is a one, the corresponding traffic light 
+        comes on. In the image on the left, the binary data is 01010101. If you 
+        look closely you can see that the lights that are on, correspond to the 
+        ones in the data byte. 01010101 is 55 hexadecimal. Hex' numbers are explained 
+        <a href="240-hex-bin.htm">here.</a> Here is a code snippet to control 
+        the lights.</p>
+<pre>
+; ===========================================================================
+; ===== 99Tlight.asm ========================================================
+; ===== Traffic Lighte on Port 01 ===========================================
+Start:
+	MOV	AL,55	; 01010101
+	OUT	01	; Send the data in AL to Port 01 (the traffic lights)
+
+	MOV	AL,AA	; 10101010
+	OUT	01	; Send the data in AL to Port 01 (the traffic lights)
+
+	JMP	Start
+	
+	END
+; ===========================================================================
+</pre>      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Seven Segment Displays<br>
+      Port 02</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-sevseg.PNG" alt="Seven Segment Display Image" width="206" height="250"></td>
+    <td><p>The seven segments displays are connected to Port 02. If a byte of 
+        data is sent to this port, wherever there is a one, the corresponding 
+        segment comes on. The rightmost bit controls which of the two groups of 
+        segments is active. This is a simple example of mulitplexing. If the least 
+        significant bit (LSB) is zero, the left segments will be active. If the 
+        least significant bit (LSB) is one, the right segments will be active. 
+        Here is a code snippet.</p>
+<pre>
+; ======================================================
+; ===== 99sevseg.asm ===================================
+; ===== Seven Segment Displays Port 02 =================
+Start:
+	MOV	AL,FA	; 1111 1010
+	OUT	02	; Send the data in AL to Port 02
+
+	MOV	AL,0	; 0000 0000
+	OUT	02	; Send the data in AL to Port 02
+	
+	MOV	AL,FB	; 1111 1011
+	OUT	02	; Send the data in AL to Port 02
+
+	MOV	AL,1	; 0000 0001
+	OUT	02	; Send the data in AL to Port 02
+
+	JMP	Start
+	
+	END
+; ======================================================
+</pre>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Heater and Thermostat<br>
+      Port 03</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-heater.PNG" alt="Heater and Thermostat Image" width="206" height="250"></td>
+    <td><p>The heater and thermostat system is connected to Port 03. Send 00 to 
+        port 3 to turn the heater off. Send 80 to port 03 to turn the heater on. 
+        Input from port 03 to test the thermostat state. The code snippet below 
+        is an incomplete solution to control the heater to keep the temperature 
+        steady at about 21 C. You can click the thermometer to set the temperature. 
+        This can save time when you are testing the system.</p>
+<pre>
+; ===== Heater and Thermostst on Port 03 ==========================
+; ===== 99Heater.asm ==============================================
+; ===== Heater and Thermostst on Port 03 ==========================
+	MOV	AL,0	; Code to turn the heater off
+	OUT	03	; Send code to the heater
+
+	IN	03	; Input from Port 03
+	AND	AL,1	; Mask off left seven bits
+	JZ	Cold	; If the result is zero, turn the heater on
+	HALT		; Quit
+
+Cold:
+	MOV	AL,80	; Code to turn the heater on
+	OUT	03	; Send code to the heater
+	
+	END
+; =================================================================
+</pre>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Snake and Maze<br>
+      Port 04</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-snake.PNG" alt="A Snake in The Maze Multiplexing Game" width="206" height="303"></td>
+    <td><p>The left four bits control the direction of the snake.</p>
+      <ul>
+        <li>&nbsp;&nbsp;80&nbsp;&nbsp;&nbsp;&nbsp;Up</li>
+        <li>&nbsp;&nbsp;40&nbsp;&nbsp;&nbsp;&nbsp;Down</li>
+        <li>&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;Left</li>
+        <li>&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;Right</li>
+      </ul>
+      <p>The right four bits control the distance moved.</p>
+      <p>For example, 4F means Down 15. 4 means down. F means 15.</p>
+      <p>This program is rather wasteful of RAM. If you want to traverse the entire 
+        maze and go back to the strart, you will run out of RAM. A good learning 
+        task is to use a data table. This reduces the size of the program greatly. 
+        Also, it is good style to separate code and data.</p>
+      <p>Here is a code sample - not using a data table.</p>
+      <pre>
+; ================================================================
+; ===== 99snake.asm ==============================================
+; ===== Snake and Maze ===========================================
+
+Start:
+	MOV	AL,FF	; Special code to reset the snake.
+	OUT	04	; Send AL to port 04 to control the snake.
+
+	MOV	AL,4F	; 4 means DOWN.  F means 15.
+	OUT	04	; Send 4F to the snake
+	OUT	04	; Send 4F to the snake
+	OUT	04	; Send 4F to the snake
+	OUT	04	; Send 4F to the snake
+
+	JMP	Start
+
+	END
+; ================================================================
+</pre> </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Stepper Motor<br>
+      Port 05</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-motor.PNG" alt="Stepper Motor Image" width="206" height="250"></td>
+    <td><p>Here is a stepper motor. Normal motors run continuously and it is hard 
+        to control their movement. Stepper motors step through a precise angle 
+        when electromagnets are energised. Stepper motors are used for precise 
+        positional control in printers, plotters, robotic devices, disk drives 
+        and for any application where precise positional accuracy is required.</p>
+      <p>The motor is controlled by energising the four magnets in turn. It is 
+        possible to make the motor move in half steps by energising single and 
+        pairs of magnets. If the magnets are energised in the wrong sequence, 
+        the motor complains by a bleep from the computer speaker. Here is a code 
+        snippet to control the motor. Note that it would be better coding style 
+        to use a data table.</p>
+<pre>
+; ================================
+; ===== 99Step.asm ===============
+; ===== Stepper Motor ============
+	mov	al,1	out	05
+	mov	al,2	out	05
+	mov	al,4	out	05
+	mov	al,8	out	05
+	mov	al,9	out	05
+	mov	al,1	out	05
+	mov	al,3	out	05
+	mov	al,2	out	05
+	mov	al,6	out	05
+	mov	al,4	out	05
+	mov	al,c	out	05
+	mov	al,8	out	05
+	mov	al,9	out	05
+	mov	al,1	out	05
+
+	end
+; ================================
+</pre>
+      </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Lift/Elevator<br>
+      Port 06</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-lift.PNG" alt="Lift Controller Image" width="206" height="458"></td>
+    <td><p><strong>Input Signals</strong></p>
+      <p>Bits 8 and 7 are unused. Bit 6 is wired to the top call button. Bit 5 
+        is wired to the bottom call button. If these buttons are clicked with 
+        the mouse, the corresponding bits come on. Bit 4 senses the lift and goes 
+        high when the lift cage reaches the bottom of the shaft. Bit 3 senses 
+        the lift and goes high when the lift cage reaches the top of the shaft.</p>
+      <p><strong>Outputs</strong></p>
+      <p>Bit 2 turns on the lift motor and the cage goes down.</p>
+      <p>Bit 1 turns on the lift motor and the cage goes up.</p>
+      <p>&nbsp;</p>
+      <p><strong>Ways To Destroy the Lift</strong></p>
+      <ol>
+        <li>Turn on bits 1 and 2 at the same time. This causes the motor to go 
+          up and down simulatneously!</li>
+        <li>Crash the lift into the bottom of the shaft.</li>
+        <li>Crash the lift into the top of the shaft.</li>
+        <li>Run the simulation too slowly. Even if the code is logically correct, 
+          the lift crashes into the end of the shaft before the program has time 
+          to switch off the motor.</li>
+      </ol>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Hardware Timer<br>
+      INT 02</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-hw-timer.PNG" alt="Altering the Hardware Timer" width="337" height="334"></td>
+    <td> The hardware timer generates <strong>INT 02</strong> at regular time 
+      intervals. The time interval can be changed using the Configuration tab 
+      as shown in the image. The CPU will ignore <strong>INT 02</strong> unless 
+      the (I) flag in the status register (SR) is set. Use <strong>STI</strong> 
+      to set the (I) flag. Use <strong>CLI</strong> to clear the (I) flag.<br>
+      <br>
+      The code sample below processes <strong>INT 02</strong> but does nothing 
+      useful.<br>
+      <br>
+      If the CPU clock is too slow, a new <strong>INT 02</strong> can occur before 
+      the previous one has been handled. This is not necessarily a problem as 
+      long as the CPU eventually catches up. To allow this to work, it is essential 
+      that the interrupt handler saves and restores any registers it uses. Use 
+      <strong>PUSH</strong> and <strong>PUSF</strong> to save registers. Use <strong>POPF</strong> 
+      and <strong>POP</strong> to restore registers. Remember to pop items in 
+      the reverse order that they were pushed. Code like this is &quot;re-entrant&quot;.<br>
+      <br>
+      If the CPU is too slow and does not catch up, the stack will gradually grow 
+      and eat up all the available RAM. Eventually the stack will overwrite the 
+      program causing a crash. It is a useful learning exercise to slow the CPU 
+      clock and watch this happen. 
+      <pre>
+	jmp	start
+	db	10	; Hardware Timer Interrupt Vector
+
+; ===== Hardware Timer =======
+	org	10
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	iret
+; ============================
+
+; ===== Idle Loop ============
+start:
+	STI		; Set (I) flag
+idle:
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	jmp	idle
+; ============================
+	end
+; ============================
+</pre>
+	</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" cellpadding="2" cellspacing="0">
+  <tr valign="top" bgcolor="#FFFF99"> 
+    <td><strong>Numeric Keypad<br>
+      Port 08<br>
+      INT 04</strong></td>
+    <td><strong>How to Use</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td><img src="400-numerickp.PNG" alt="Numeric Keypad Image" width="157" height="171"></td>
+    <td> This is one of the more complex devices. To make the numeric keypad visible, 
+      use <strong>OUT 08</strong>. Every time a key is pressed, a hardware interrupt, 
+      <strong>INT 04</strong> is generated. By default, the CPU will ignore this 
+      interrupt. To process the interrupt, at the start of the program, use the 
+      <strong>STI</strong> command to set the interrupt flag (I) in the CPU status 
+      register (SR). Place an interrupt vector at RAM address <strong>04</strong>. 
+      This should point to your interrupt handler code. The interrupt handler 
+      should use <strong>IN 08</strong> to read the key press into the <strong>AL</strong> 
+      register.<br> 
+      <br>
+      Once <strong>STI</strong> has set the (I) flag in the status register (SR), 
+      interrupts from the hardware timer will also be generated. These must be 
+      processed too. The hardware timer generates <strong>INT 02</strong>. To 
+      process this interrupt, place an interrupt vector at RAM location <strong>02</strong>. 
+      This should point to the timer interrupt handler code. The timer code can 
+      be as simple as <strong>IRET</strong>. This will cause an interrupt return 
+      without doing any other processing.
+<pre>
+	jmp	start
+	db	10	; Hardware Timer Interrupt Vector
+	db	00	; Keyboard Interrupt Vector (unused)
+	db	20	; Numeric Keypad Interrupt Vector
+
+; ===== Hardware Timer =======
+	org	10
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	iret
+; ============================
+
+; ===== Keyboard Handler =====
+	org	20
+	CLI		; Prevent re-entrant use
+	push	al
+	pushf
+
+	in	08
+	nop		; Process the key press here
+	nop
+	nop
+	nop
+	nop
+
+	popf
+	pop	al
+	STI
+	iret
+; ============================
+
+; ===== Idle Loop ============
+start:
+	STI		; Set (I) flag
+	out	08	; Make keypad visible
+idle:
+	nop		; Do something useful here
+	nop
+	nop
+	nop
+	nop
+	jmp	idle
+; ============================
+	end
+; ============================
+</pre>
+    </td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="390-TheEditor.htm">Previous</a> | <strong>Next</strong></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

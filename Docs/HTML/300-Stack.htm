@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Stack Instructions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Stack Instructions</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="290-Compare.htm">Previous</a> | <a href="310-Procedures.htm">Next</a></p>
+<h3>Stack Instructions - Flags are NOT set.</h3>
+<p>After pushing items onto the stack, always pop them off in reverse order. This 
+  is because the stack works by the <strong>Last In First Out (LIFO)</strong> 
+  rule. The stack is an area of RAM used in this particular way. Any part of RAM 
+  could be used. In the simulator, the stack is located just below the Video RAM 
+  at address [BF]. The stack grows towards zero. It is easily possible to implement 
+  a stack that grows the other way.</p>
+<h3>Stack Examples</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr bgcolor="#FFFFCC"> 
+    <td><strong>Assembler</strong></td>
+    <td><strong>Machine&nbsp;Code</strong></td>
+    <td><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td>PUSH BL</td>
+    <td>E0 01</td>
+    <td>Push BL onto the stack and subtract one from the stack pointer.<br> <br>
+      E0 is the machine instruction for PUSH.<br>
+      01 refers to the BL register.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>POP BL</td>
+    <td>E1 01</td>
+    <td>Add one to the stack pointer and pop BL from the stack.<br> <br>
+      E1 is the machine instruction for POP.<br>
+      01 refers to the BL register.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>PUSHF</td>
+    <td>EA</td>
+    <td>Save the CPU status register (SR) onto the stack. This saves the CPU flags.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>POPF</td>
+    <td>EB</td>
+    <td>Restore the CPU status register (SR) from the stack. This restores the 
+      CPU flags.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h3>The stack is used to ...</h3>
+<ul>
+  <li>&nbsp;save register contents for later restoration.</li>
+  <li> &nbsp;pass parameters into procedures and return results.</li>
+  <li> &nbsp;reverse the order in which data is stored.</li>
+  <li> &nbsp;save addresses so procedures and interrupts can return to the right 
+    place.</li>
+  <li>&nbsp;perform postfix arithmetic.</li>
+  <li>&nbsp;make recursion possible.</li>
+</ul>
+<h3>Stack Pointer</h3>
+<p>A CPU register (SP) that keeps track of (is a pointer to) the data on the stack. 
+  It is colour coded with a blue highlight in the simulator RAM display.</p>
+<h3>Push and Pop</h3>
+<p><strong>Push</strong> - Add data to the stack at the stack pointer position 
+  and subtract one from the stack pointer.<br>
+  <strong>Pop</strong> - Add one to the stack pointer and remove data from the 
+  stack at the stack pointer position.</p>
+<h3>LIFO</h3>
+<p>Last in First out. The stack operates strictly to this rule. When data is pushed 
+  onto the stack, it must later be popped in reverse order.</p>
+<h3>Stack Overflow</h3>
+<p>The stack is repeatedly pushed until it is full. The simulator does not detect 
+  this condition and the stack can overwite program code or data. Real life programs 
+  can fail in the same way.</p>
+<h3>Stack Underflow</h3>
+<p>The stack is repeatedly popped until it is empty. The next pop causes an underflow.</p>
+<p><a href="index.htm">Home</a> | <a href="290-Compare.htm">Previous</a> | <a href="310-Procedures.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

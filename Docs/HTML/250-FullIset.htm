@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Detailed Instruction Set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Detailed Instruction Set</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="240-hex-bin.htm">Previous</a> | <a href="260-ArithAndLogic.htm">Next</a></p>
+
+<h2>The Full Instruction Set </h2>
+<p><a href="260-ArithAndLogic.htm">Arithmetic Logic</a><br>
+  <a href="270-Jumps.htm">Jump Instructions</a><br>
+  <a href="280-Moves.htm">Move Instructions</a><br>
+  <a href="290-Compare.htm">Compare Instructions</a><br>
+  <a href="300-Stack.htm">Stack Instructions</a><br>
+  <a href="310-Procedures.htm">Procedures And Interrupts</a><br>
+  <a href="320-InputOutput.htm">Inputs and Outputs</a><br>
+  <a href="330-OtherInstructions.htm">Other Instructions</a></p>
+<h3>General Information</h3>
+<h3><br>
+  CPU Registers</h3>
+<p>There are four general purpose registers called AL, BL, CL and DL.</p>
+<p>There are three special purpose registers. These are</p>
+<ul>
+  <li> IP is the instruction pointer.</li>
+  <li> SP is the stack pointer.</li>
+  <li> SR is the status register. This contains the I, S, O and Z flags.</li>
+</ul>
+<h3>Flags</h3>
+<p>Flags give information about the outcome of computations performed by the CPU. 
+  Single bits in the status register are used as flags. This simulator has flags 
+  to indicate the following.</p>
+<ul>
+  <li>S The sign flag is set if a calculation gives a negative result.</li>
+  <li> O The overflow flag is set if a result is too big to fit in 8 bits.</li>
+  <li> Z The zero flag is set if a calculation gives a zero result.</li>
+  <li> I is the hardware interrupts enabled flag.</li>
+</ul>
+
+<p>Most real life CPUs have more than four flags.</p>
+<h3> Registers and Machine Codes</h3>
+<p>The registers and their equivalent machine code numbers are shown below.</p>
+<pre> Register names AL  BL  CL  DL
+ Machine codes  00  01  02  03</pre>
+<p><strong>Example :</strong> To add one to the CL register use the instruction</p>
+<pre>
+Assembly Code        INC        CL
+Machine Code Hex     A4         02
+Machine code Binary  10100100   00000010</pre>
+<p> A4 is the machine instruction for the INC command.</p>
+<p>02 refers to the CL register.</p>
+<p>The assembler is not case sensitive. mov is the same as MOV and Mov.</p>
+<p>Within the simulator, hexadecimal numbers may not have more than two hexadecimal 
+  digits.</p>
+<h3> Hexadecimal numbers</h3>
+<p>15, 3C and FF are examples of hexadecimal numbers. When using the assembler, 
+  all numbers should be entered in hexadecimal. The CPU window displays the registers 
+  in binary, hexadecimal and decimal. Look at the <a href="240-hex-bin.htm">Hexadecimal 
+  and Binary</a> page for more detail.</p>
+<h3>Negative numbers</h3>
+<p>FE is a negative number. Look at the <a href="360-negativeNum.htm">Negative 
+  Numbers</a> table for details of twos complement numbers. </p>
+<p>In a byte, the left most bit is used as a sign bit. This has a value of minus 
+  128 decimal. </p>
+<p>Bytes can hold signed numbers in the range -128 to +127. </p>
+<p>Bytes can hold unsigned numbers in the range 0 to 255.</p>
+<h3> Indirection</h3>
+<p>When referring to data in RAM, square brackets are used. For example [15] refers 
+  to the data at address 15hex in RAM. </p>
+<p>The same applies to registers. [BL] refers to the data in RAM at the address 
+  held in BL. This is important and frequently causes confusion.</p>
+<p>These are indirect references. Instead of using the number or the value in 
+  the register directly, these values refer to RAM locations. These are also called 
+  pointers.</p>
+<h3> Comparing with 80x86 Chips</h3>
+<p>At the mnemonic level, the simulator instructions look very like 80x86 assembly 
+  code mnemonics. Sufficient instructions are implemented to permit realistic 
+  programming but the full instruction set has not been implemented. All the simulated 
+  instructions apply to the low eight bits of the 80x86 CPU. The rest of the CPU 
+  has not been simulated.</p>
+<p>In the registered version, CALL, RET, INT, IRET and simulated hardware interrupts 
+  are available so procedures and interrupts can be written.</p>
+<p>Most of the instructions behave as an 80x86 programmer would expect. The MUL 
+  and DIV (multiplication and division) commands are simpler than the 80x86 equivalents. 
+  The disadvantage of the simulator approach is that overflow is much more probable. 
+  The simulator versions of ADD and SUB are realistic.</p>
+<p>The 8086 DIV instruction calculates both DIV and MOD in the same instruction. 
+  The simulator has MOD as a separate instruction.</p>
+<p>The machine codes are quite unlike the 80x86 machine codes. They are simpler, 
+  less compact but designed to make the machine code as simple as possible.</p>
+<p>With 80x86 machine code, a mnemonic like MOV AL,15 is encoded in two bytes. 
+  MOV AL, is encoded into one byte and the 15 goes into another. This means that 
+  a lot of different machine OP CODES are needed for all the different combinations 
+  of MOV commands and registers.</p>
+<p>This simulator needs three bytes. MOV is encoded as a byte sized OP CODE. AL 
+  is encoded as a byte containing 00. The 15 goes into a byte as before. This 
+  is not very efficient but is very simple.</p>
+<p><a href="index.htm">Home</a> | <a href="240-hex-bin.htm">Previous</a> | <a href="260-ArithAndLogic.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

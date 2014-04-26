@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Learning Tasks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Learning Tasks</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="080getting-started.htm">Previous</a> 
+  | <a href="100-01first.htm">Next</a></p>
+<h3> The Tasks</h3>
+<p>Here are all the learning tasks grouped together with pointers to the example 
+  programs and explanatory notes.</p>
+<hr>
+<h3>Simple Arithmetic </h3>
+<p>Example - <a href="100-01first.htm">01first.asm</a> - Arithmetic</p>
+<ol>
+  <li>Write a program that subtracts using SUB</li>
+  <li>Write a program that multiplies using MUL</li>
+  <li>Write a program that divides using DIV</li>
+  <li>Write a program that divides by zero. Make a note to avoid doing this in 
+    real life.</li>
+</ol>
+<hr>
+<h3>Using Hexadecimal</h3>
+<p>Example - <a href="120-02tlight.htm">02tlight.asm</a> - Traffic Lights</p>
+<ol start="5">
+  <li> 
+    <p>Use the help page on Hexadecimal and Binary numbers. Work out what hexadecimal 
+      numbers will activate the correct traffic lights. Modify the program to 
+      step the lights through a realistic sequence.</p>
+  </li>
+</ol>
+    
+<hr>
+<h3>ASCII Codes</h3>
+<p>Example - <a href="130-03move.htm">03move.asm</a></p>
+<ol start="6">
+  <li>Look up the ASCII codes of H, E, L, L and O and copy these values to memory 
+    locations C0, C1, C2, C3 and C4. This is a simple and somewhat crude way to 
+    display text on a memory mapped display.</li>
+</ol>
+<hr>
+<h3>Counting and Jump Commands</h3>
+<p> Example - <a href="140-04IncJmp.htm">04incjmp.asm</a></p>
+<ol start="7">
+  <li>Rewrite the example program to count backwards using DEC BL.</li>
+  <li>Rewrite the example program to count in threes using ADD BL,3.</li>
+  <li>Rewrite the program to count 1 2 4 8 16 using MUL BL,2</li>
+  <li>Here is a more difficult task. Count 0 1 1 2 3 5 8 13 21 34 55 98 overflow. 
+    Here each number is the sum of the previous two. You will need to use two 
+    registers and two RAM locations for temporary storage of numbers. If you have 
+    never programmed before, this is a real brain teaser. Remember that the result 
+    will overflow when it goes above 127.<br>
+    This number sequence was first described by Leonardo Fibonacci of Pisa (1170_1230)</li>
+</ol>
+<hr>
+<h3>Character Input Output </h3>
+<p>Example - <a href="150-05keyb-in.htm">05keybin.asm</a></p>
+<ol start="11">
+  <li>Easy! Input characters and display each character at the top left position 
+    of the VDU by copying them all to address [C0].</li>
+  <li>Harder Use BL to point to address [C0] and increment BL after each key press 
+    in order to see the text as you type it.</li>
+  <li>Harder! Store all the text you type in RAM when you type it in. When you 
+    press Enter, display the stored text on the VDU display.</li>
+  <li>Difficult Type in text and store it. When Enter is pressed, display it on 
+    the VDU screen in reverse order. Using the stack makes this task easier</li>
+</ol>
+<hr>
+<h3>Procedures </h3>
+<p> Example - <a href="160-06proc.htm">06proc.asm</a></p>
+<ol start="15">
+  <li>Re-do the traffic lights program and use this procedure to set up realistic 
+    time delays. 02tlight.asm</li>
+  <li>Re-do the text input and display program with procedures. Use one procedure 
+    to input the text and one to display it.</li>
+</ol>
+<hr>
+<h3>Text IO and Procedures</h3>
+<p>Example - <a href="170-07textio.htm">07textio.asm</a></p>
+<ol start="17">
+  <li>Write a program using three procedures. The first should read text from 
+    the keyboard and store it in RAM. The second should convert any upper case 
+    characters in the stored text to lower case. The third should display the 
+    text on the VDU screen.</li>
+</ol>
+<hr>
+<h3>Data Tables </h3>
+<p> Example - <a href="180-08table.htm">08table.asm</a></p>
+<ol start="18">
+  <li> Improve the traffic lights data table so there is an overlap with both 
+    sets of lights on red.</li>
+  <li>Use a data table to navigate the snake through the maze. This is on port 
+    04. Send FF to the snake to reset it. Up, down left and right are controlled 
+    by the left four bits. The right four bits control the distance moved.</li>
+  <li>Write a program to spin the stepper motor. Activate bits 1, 2, 4 and 8 in 
+    sequence to energise the electromagnets in turn. The motor can be half stepped 
+    by turning on pairs of magnets followed by a single magnet followed by a pair 
+    and so on.</li>
+  <li>Use a data table to make the motor perform a complex sequence of forward 
+    and reverse moves. This is the type of control needed in robotic systems, 
+    printers and plotters. For this exercise, it does not matter exactly what 
+    the motor does.</li>
+</ol>
+<hr>
+<h3>Parameters </h3>
+<p> Example - <a href="190-09param.htm">09param.asm</a></p>
+<ol start="22">
+  <li>Write a procedure that doubles a number. Pass the single parameter into 
+    the procedure using a register. Use the same register to return the result.</li>
+  <li>Write a procedure to invert all the bits in a byte. All the zeros should 
+    become ones. All the ones should become zeros. Pass the value to be processed 
+    into the procedure using a RAM location. Return the result in the same RAM 
+    location.</li>
+  <li>Write a procedure that works out Factorial N. This example shows one method 
+    for working out factorial N. Factorial 5 is 5 * 4 * 3 * 2 * 1 = 120. Your 
+    procedure should work properly for factorial 1, 2, 3, 4 or 5. Factorial 6 
+    would cause an overflow. Use the stack to pass parameters and return the result. 
+    Calculate the result. Using a look up table is cheating!</li>
+  <li>Write a procedure that works out Factorial N. Use the stack for parameter 
+    passing. Write a recursive procedure. Use this definition of Factorial. <br>
+    Factorial ( 0 ) is defined as 1.<br>
+    Factorial ( N ) is defined as N * Factorial (N - 1).<br>
+    To work out Factorial (N), the procedure first tests to see if N is zero and 
+    if not then re-uses itself to work out N * Factorial (N - 1). This problem 
+    is hard to understand in any programming language. In assembly code it is 
+    harder still.</li>
+</ol>
+<hr>
+<h3>Software Interrupts</h3>
+<p> Example - <a href="200-10swint.htm">10swint.asm</a></p>
+<ol start="26">
+  <li>The simulated keyboard generates INT 03 every time a key is pressed. Write 
+    an interrupt 03 handler to process the key presses. Use IN 07 to fetch the 
+    pressed key into the AL register. The original IBM PC allocated 16 bytes for 
+    key press storage. The 16 locations are used in a circular buffer fashion. 
+    Try to implement this.</li>
+  <li> 
+    <p>Build on task 26 by puting characters onto the next free screen location. 
+      See if you can get correct behaviour in response to the Enter key being 
+      pressed (fairly easy) and if the Back Space key being pressed (harder).</p>
+  </li>
+</ol>
+<hr>
+<h3> Hardware Interrupts</h3>
+<p> Example - <a href="210-11hwint.htm">11hwint.asm</a></p>
+<ol start="28">
+  <li>Write a program that controls the heater and thermostat whilst at the same 
+    time counting from 0 to 9 repeatedly, displaying the result on one of the 
+    seven segment displays. If you want a harder challenge, count from 0 to 99 
+    repeatedly using both displays. Use the simulated hardware interrupt to control 
+    the heater and thermostat.</li>
+  <li>A fiendish problem. Solve the Tower of Hanoi problem whilst steering the 
+    snake through the maze. Use the text characters A, B, C Etc. to represent 
+    the disks. Use three of the four rows on the simulated screen to represent 
+    the pillars.<br>
+    <br>
+    I am not aware of anyone having solved the tower of Hanoi (including me), 
+    let alone controlling the snake at the same time.<br>
+    <br>
+    <img src="090hanoi.PNG" alt="Tower of Hanoi Puzzle Image" width="448" height="272"> </li>
+  <li>Use the keyboard on Port 07. Write an interrupt handler (INT&nbsp;03) to 
+    process the key presses. You must also process INT&nbsp;02 (the hardware timer) 
+    but it need not perform any task. For a more advanced task, implement a 16 
+    byte circular buffer. Write code to place the buffered text on the VDU screen 
+    when you press Enter. For an even harder task, implement code to process the 
+    Backspace key to delete text characters in the buffer.</li>
+</ol>
+<p><a href="index.htm">Home</a> | <a href="080getting-started.htm">Previous</a> 
+  | <a href="100-01first.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

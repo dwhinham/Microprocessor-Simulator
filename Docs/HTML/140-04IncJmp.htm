@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Example - 04IncJmp.asm - Counting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Example - 04IncJmp.asm - Counting</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="130-03move.htm">Previous</a> | <a href="150-05keyb-in.htm">Next</a></p>
+<h3>Example - 04IncJmp.asm</h3>
+<table border="1" cellspacing="0" cellpadding="5">
+<tr>
+<td bgcolor="#ccddee">
+<pre>
+; ===== Counting ===================================
+
+
+	MOV	BL,40	; Initial value stored in BL
+
+Rep:			; Jump back to this label
+	INC	BL	; Add ONE to BL
+	JMP	Rep	; Jump back to Rep
+
+	END		; Program Ends
+
+; ===== Program Ends ===============================
+
+	TASK
+	=====
+	
+	Rewrite the program to count backwards using DEC BL.
+	
+	Rewrite the program to count in threes using ADD BL,3.
+	
+	Rewrite the program to count 1 2 4 8 16 using MUL BL,2
+	
+	Here is a more difficult task.  
+	Count 0 1 1 2 3 5 8 13 21 34 55 98 overflow.  
+	Here each number is the sum of the previous two.  
+	You will need to use registers or RAM locations 
+	for temporary storage of the numbers.  
+	If you have never programmed before, this is a real brain teaser. 
+	Remember that the result will overflow when it goes above 127.
+	
+	This number sequence was first described by 
+	Leonardo Fibonacci of Pisa (1170_1230)
+</pre>
+</td>
+</tr>
+</table>
+<p>The program counts up in steps of one until the total is too big to be stored 
+  in a single byte. At this point the calculation overflows. Watch the values 
+  in the registers. In particular, watch IP and SR. These are explained below.</p>
+<p>Although this program is very simple, some new ideas are introduced. </p>
+<h3> MOV BL,40</h3>
+<p>This line initialises BL to 40. </p>
+<h3> Rep:</h3>
+<p>Rep: is a label. Labels are used with Jump commands. It is possible for programs 
+  to jump backwards or forwards. Because of the way numbers are stored, the largest 
+  jumps are -128 backwards and + 127 forwards. Labels must begin with a letter 
+  or the _ character. Labels may contain letters, digits and the _ character. 
+  Destination labels must end with a Colon: </p>
+<h3>INC BL</h3>
+<p>This command adds one to BL. Watch the BL register. It will count up from 40 
+  in hexadecimal so after 49 comes 4A, 4B, 4C, 4D, 4E, 4F, 50, 51 and so on. </p>
+<h3>Overflow</h3>
+<p>When BL reaches 7F hex or 127 in decimal numbers the next number ought to be 
+  128 but because of the way numbers are stored in binary, the next number is 
+  minus 128. This effect is called an <strong>OVERFLOW.</strong> </p>
+<h3>Status Register (SR)</h3>
+<p>The status register labelled SR contains four flag bits that give information 
+  about the state of the CPU. There are three flags that indicate whether a calculation 
+  overflowed, gave a negative result or gave a zero result. Calculations set these 
+  flags </p>
+<ul>
+  <li>S The sign flag indicates a negative result.</li>
+  <li>O The overflow flag indicates overflows.</li>
+  <li>Z The zero flag indicates a zero result.</li>
+  <li>I Interrupts enabled. STI turns this on. CLI turns this off.</li>
+</ul>
+<p>These flags are described in more detail later. </p>
+<h3> JMP Rep</h3>
+<p>This command causes the central processing unit (CPU) to jump back and repeat 
+  earlier commands or jump forward and skip some commands. </p>
+<h3> Instruction Pointer (IP)</h3>
+<p>The instruction pointer labelled IP contains the address of the instruction 
+  being executed. This is indicated by a red highlighted RAM position in the simulator. 
+  Each CPU command causes the IP to be increased by 1, 2 or 3 depending on the 
+  size of the command. In the RAM displays, the instruction pointer is highlighted 
+  red with yellow text.</p>
+<pre>
+	NOP		; Increase IP by 1
+	INC BL		; Increase IP by 2
+	ADD AL,BL	; Increase IP by 3
+	JMP Rep		; Add or subtract a value from IP to
+			; jump to a new part of the program.
+ </pre>
+<h3>Fetch Execute Cycle</h3>
+<table>
+<tr>
+    <td bgcolor="#ffeedd"> <p><strong>Fetch</strong> the instruction. IP points 
+        to it. This is called the operator.<br>
+        If necessary, <strong>fetch</strong> data. IP + 1 points to it. This is 
+        the first operand.<br>
+        If necessary, <strong>fetch</strong> data. IP + 2 points to it. This is 
+        the second operand.<br>
+        <strong>Execute</strong> the command. This may involve more fetching or 
+        putting of data.<br>
+        <strong>Increase IP</strong> to point to the next command or <strong>calculate 
+        IP</strong> for Jump commands.<br>
+        <strong>Repeat</strong> this cycle.</p>
+      <p>Every machine cycle has one operator or instruction. There could be zero, one 
+  or two operands depending on the instruction. OP Codes are the machine codes 
+  that correspond to the operators and operands.</p>
+</td>
+</tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="130-03move.htm">Previous</a> | <a href="150-05keyb-in.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

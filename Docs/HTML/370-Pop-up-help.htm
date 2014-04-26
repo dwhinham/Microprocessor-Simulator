@@ -1,0 +1,1287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Pop-up Help</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1><a name="top"></a>Pop-up Help</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="360-negativeNum.htm">Previous</a> | 
+  <a href="380-TruthTables.htm">Next</a></p>
+<p><a href="#add">ADD</a> <a href="#and">AND</a> <a href="#call">CALL</a> <a href="#cli">CLI</a> 
+  <a href="#clo">CLO</a> <a href="#cmp">CMP</a> <a href="#db">DB</a> <a href="#dec">DEC</a> 
+  <a href="#div">DIV</a> <a href="#end">END</a> <a href="#halt">HALT</a> <a href="#in">IN 
+  </a><a href="#inc">INC</a> <a href="#int">INT</a> </p>
+<p><a href="#iret">IRET</a> <a href="#jmp">JMP</a> <a href="#jno">JNO</a> <a href="#jns">JNS</a> 
+  <a href="#jnz">JNZ</a> <a href="#jo">JO</a> <a href="#js">JS</a> <a href="#jz">JZ</a> 
+  <a href="#mod">MOD</a> <a href="#mov">MOV</a> <a href="#mul">MUL</a> <a href="#nop">NOP</a> 
+  <a href="#not">NOT</a> <a href="#or">OR</a> <a href="#org">ORG</a> </p>
+<p><a href="#out">OUT</a> <a href="#pop">POP</a> <a href="#popf">POPF</a> <a href="#push">PUSH</a> 
+  <a href="#pushf">PUSHF</a> <a href="#ret">RET</a> <a href="#rol">ROL</a> <a href="#ror">ROR</a> 
+  <a href="#shl">SHL</a> <a href="#shr">SHR</a> <a href="#sti">STI</a> <a href="#sub">SUB</a> 
+  <a href="#xor">XOR</a></p>
+<p></p>
+<h3>CPU General Purpose Registers</h3>
+<p>The CPU is where all the arithmetic and logic (decision making) takes place. 
+  The CPU has storage locations called registers. The CPU has flags which indicate 
+  zero, negative or overflowed calculations. More information is included in the 
+  description of the system architecture.</p>
+<p>The CPU registers are called AL, BL, CL and DL.<br>
+  The machine code names are 00, 01, 02 and 03.</p>
+<p>Registers are used for storing binary numbers.</p>
+<p>Once the numbers are in the registers, it is possible to perform arithmetic 
+  or logic. Sending the correct binary patterns to peripherals like the traffic 
+  lights, makes it possible to control them.</p>
+<p>; semicolon begins a program comment.</p>
+<p>Comments are used to document programs. They are helpful to new programmers 
+  joining a team and to existing people returning to a project having forgotten 
+  what it is about.</p>
+<p>Good comments explain <strong>WHY</strong> things are being done. Poor comments 
+  simply repeat the code or state the totally obvious.</p>
+<h3>Ram Addresses</h3>
+<p>Examples [7F] [22] [AL] [CL]</p>
+<p>[7F] the contents of RAM at location 7F</p>
+<p>[CL] the contents of the RAM location that CL points to. CL contains a number 
+  that is used as the address.</p>
+<hr>
+<h3>The Instruction Set</h3>
+<hr>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="add"></a>ADD - Add two values 
+        together</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> 
+      <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr bgcolor="#FFFFCC"> 
+    <td>Assembler</td>
+    <td>Machine Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr> 
+    <td>ADD BL,CL</td>
+    <td>A0 01 02</td>
+    <td>Add CL to BL. Answer goes into BL</td>
+  </tr>
+  <tr> 
+    <td>ADD AL,12</td>
+    <td>B0 00 12</td>
+    <td>Add 12 to AL. Answer goes into AL</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="and"></a>AND - Logical AND 
+        two values together</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr bgcolor="#FFFFCC"> 
+    <td>Assembler</td>
+    <td>Machine Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr> 
+    <td>AND BL,CL</td>
+    <td>AA 01 02</td>
+    <td> AND CL with BL. Answer goes into BL</td>
+  </tr>
+  <tr> 
+    <td>AND AL,12</td>
+    <td>BA 00 12</td>
+    <td> AND 12 with AL. Answer goes into AL</td>
+  </tr>
+  <tr> 
+    <td colspan="3"><p>The AND rule is that two ones give a one. All other inputs 
+        give nought. Look at this example...</p>
+      <pre>
+       10101010
+       00001111
+       --------
+ANSWER 00001010
+
+The left four bits are masked to 0.</pre> </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="call"></a>CALL and RET</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CALL 50</td>
+    <td>CA 50</td>
+    <td>Call the procedure at address 50.<br>
+      The CPU pushes the instruction pointer value IP + 2 onto the stack. Later 
+      the CPU returns to this address.<br>
+      IP is then set to 50.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>RET</td>
+    <td>CB</td>
+    <td>The CPU instruction pointer is set to 50. The CPU executes instructions 
+      from this address until it reaches the RET command. It then pops the value 
+      of IP off the stack and jumps to this address where execution resumes.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="cli"></a>CLI and STI</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU (I) flag is set/cleared</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>STI</td>
+    <td>FC</td>
+    <td>STI sets the Interrupt flag.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CLI</td>
+    <td>FD</td>
+    <td> CLI clears the Interrupt flag 'I' in the status register. STI sets the 
+      interrupt flag 'I' in the status register. The machine code for CLI is FD. 
+      The machine code for STI is FC.<br>
+      If (I) is set, the CPU will respond to interrupts. The simulator generates 
+      a hardware interrupt at regular time intervals that you can adjust. <br>
+      If 'I' is set, there should be an interrupt vector at address [02]. The 
+      CPU will jump to the code that this vector points to whenever there is an 
+      interrupt. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="clo"></a>CLO</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CLO</td>
+    <td>FE</td>
+    <td>Close unwanted peripheral windows.<br>
+      CLO is not an x86 command. It closes all unnecessary simulator windows which 
+      would otherwise have to be closed manually one by one. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="cmp"></a>CMP</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CMP AL,0D</td>
+    <td>DB 00 0D</td>
+    <td> Compare AL with 0D<br>
+      If the values being compared are ...<br>
+      EQUAL set the 'Z' flag.<br>
+        AL less than 0D set the 'S' flag.<br>
+      AL greater than 0D set no flags.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CMP AL,BL</td>
+    <td>DA 00 01</td>
+    <td>Compare AL with BL<br>
+      If the values being compared are ...<br>
+      EQUAL set the 'Z' flag.<br>
+      AL less than BL set the 'S' flag.<br>
+      AL greater than BL set no flags.</td>
+  </tr>
+  <tr valign="top">
+    <td>CMP CL,[20]</td>
+    <td>DC 02 20</td>
+    <td>Compare CL with 20<br>
+      If the values being compared are ...<br>
+      EQUAL set the 'Z' flag.<br>
+      CL less than RAM[20] set the 'S' flag.<br>
+      CL greater than RAM[20] set no flags. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="db"></a>DB</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DB 22<br>
+      DB 33<br>
+      DB 44<br>
+      DB 0</td>
+    <td>22<br>
+      33<br>
+      44<br>
+      00 </td>
+    <td>Define Byte <br>
+      DB gives a method for loading values directly into RAM.<br>
+      DB does not have a machine code. <br>
+      The numbers or text after DB are loaded into RAM.<br>
+      Use DB to set up data tables.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DB &quot;Hello&quot;<br>
+      <br>
+      <br>
+      <br>
+      <br>
+      DB 0</td>
+    <td>48<br>
+      65<br>
+      6C<br>
+      6C<br>
+      6F<br>
+      00
+	</td>
+    <td>ASCII codes are loaded into RAM.<br>
+      <br>
+      <br>
+      <br>
+      <br>
+      End of text is marked by NULL
+	</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="dec"></a>DEC and INC</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>INC BL</td>
+    <td>A4 01</td>
+    <td>Add one to BL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DEC AL</td>
+    <td>A5 00</td>
+    <td>Subtract one from AL.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="div"></a>DIV and MOD</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DIV AL,5</td>
+    <td>B3 00 05</td>
+    <td>Divide AL by 5. Answer goes into AL.<br>
+      DIV differs from the x86 DIV. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>DIV AL,BL </td>
+    <td>A3 00 01</td>
+    <td>Divide AL by BL. Answer goes into AL.<br>
+      DIV differs from the x86 DIV. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>MOD AL,5</td>
+    <td>B6 00 05</td>
+    <td>MOD AL by 5.<br>
+      Remainder after division goes into AL.<br>
+      MOD is not an x86 command. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>MOD AL,BL</td>
+    <td>A6 00 01</td>
+    <td> MOD AL by BL.<br>
+      Remainder after division goes into AL.<br>
+      MOD is not an x86 command. </td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3"><p>The x86 DIV calculates div and mod in one command. The 
+        answers are put into different registers. This is not possible with the 
+        8 bit simulator so div and mod are separated and simplified.</p>
+      <p> 8 DIV 3 is 3 (with remainder 2). 8 MOD 3 is 2</p>
+</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="end"></a>END</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>END</td>
+    <td>00</td>
+    <td>END stops further program execution.<br>
+      The simulator achieves this by stopping the CPU clock.<br>
+      END is also an assembler directive.<br> All code after END is ignored by 
+      the assembler.<br>
+      There should be only one END in a program.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="halt"></a>HALT</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>HALT</td>
+    <td>00</td>
+    <td>HALT stops further program execution.<br>
+      The simulator achieves this by stopping the CPU clock.<br>
+      HALT is not an assembler directive. (See END)<br>
+      There can be any number of HALT commands in a program.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="in"></a>IN and OUT</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>IN 07</td>
+    <td>F0 07</td>
+    <td>Input from port 07. The data is stored in the AL register.</td>
+  </tr>
+  <tr valign="top">
+    <td>OUT 03</td>
+    <td>F1 03</td>
+    <td>Output to port 03. The data comes from the AL register.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="inc"></a>INC and DEC</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>INC BL</td>
+    <td>A4 01</td>
+    <td>Add one to BL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DEC AL</td>
+    <td>A5 00</td>
+    <td>Subtract one from AL.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="int" id="int"></a><a name="iret"></a>INT 
+        and IRET</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>INT 02</td>
+    <td>CC 02</td>
+    <td>The return address (IP + 2) is pushed onto the stack.<br>
+      The stack pointer (SP) is reduced by one. <br>
+      RAM location 02 contains the address of the Interrupt Handler.<br>
+      This address is &quot;fetched&quot; and IP is set to it.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>IRET</td>
+    <td>CD</td>
+    <td>The return address is popped off the stack.<br>
+      The stack pointer (SP) is increased by one.<br>
+      IP is set to the return address popped off the stack.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jmp"></a>JMP</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set 
+        and the flags are ignored</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JMP Forward</td>
+    <td>C0 12</td>
+    <td>Set IP to a new value<br>
+      Add 12 to IP<br>
+      The assembler calculates the jump distance.<br>
+      The biggest possible forward jump is +127.</td>
+  </tr>
+  <tr valign="top">
+    <td>JMP Back</td>
+    <td>FE</td>
+    <td>Set IP to a new value<br>
+      Add -2 to IP<br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here.<br>
+      The assembler calculates the jump distance.<br>
+      The biggest possible backward jump is -128.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jno"></a>JNO</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JNO uses the (O) flag.</h4>
+      <p align="left">The (O) flag is set if a calculation gives a result too 
+        big to fit in an 8 but register.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNO Forward</td>
+    <td>C6 12</td>
+    <td>Jump if the (O) flag is NOT set.<br>
+      If the (O) flag is NOT set, jump forward 12 places.<br>
+      If the (O) flag is NOT set, add 12 to (IP).<br>
+      If the (O) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNO Back</td>
+    <td>C6 FE</td>
+    <td>Jump if the (O) flag is NOT set.<br>
+      If the (O) flag is NOT set, jump back 2 places.<br>
+      If the (O) flag is NOT set, add -2 to (IP).<br>
+      If the (O) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jns"></a>JNS</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JNS uses the (S) flag.</h4>
+      <p align="left">The (S) flag is set if a calculation gives a negative result.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNS Forward</td>
+    <td>C4 12</td>
+    <td>Jump if the (S) flag is NOT set.<br>
+      If the (S) flag is NOT set, jump forward 12 places.<br>
+      If the (S) flag is NOT set, add 12 to (IP).<br>
+      If the (S) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNS Back</td>
+    <td>C4 FE</td>
+    <td>Jump if the (S) flag is NOT set.<br>
+      If the (S) flag is NOT set, jump back 2 places.<br>
+      If the (S) flag is NOT set, add -2 to (IP).<br>
+      If the (S) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jnz"></a>JNZ</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JNZ uses the (Z) flag.</h4>
+      <p align="left">The (Z) flag is set if a calculation gives a zero result.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNZ Forward</td>
+    <td>C2 12</td>
+    <td>Jump if the (Z) flag is NOT set.<br>
+      If the (Z) flag is NOT set, jump forward 12 places.<br>
+      If the (Z) flag is NOT set, add 12 to (IP).<br>
+      If the (Z) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JNZ Back</td>
+    <td>C2 FE</td>
+    <td>Jump if the (Z) flag is NOT set.<br>
+      If the (Z) flag is NOT set, jump back 2 places.<br>
+      If the (Z) flag is NOT set, add -2 to (IP).<br>
+      If the (Z) flag is set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jo"></a>JO</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JO uses the (O) flag.</h4>
+      <p align="left">The (O) flag is set if a calculation gives a result too 
+        big to fit in an 8 but register.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JO Forward</td>
+    <td>C5 12</td>
+    <td>Jump if the (O) flag is set.<br>
+      If the (O) flag is set, jump forward 12 places.<br>
+      If the (O) flag is set, add 12 to (IP).<br>
+      If the (O) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JO Back</td>
+    <td>C5 FE</td>
+    <td>Jump if the (O) flag is set.<br>
+      If the (O) flag is set, jump back 2 places.<br>
+      If the (O) flag is set, add -2 to (IP).<br>
+      If the (O) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="js"></a>JS</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JS uses the (S) flag.</h4>
+      <p align="left">The (S) flag is set if a calculation gives a negative result.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JS Forward</td>
+    <td>C3 12</td>
+    <td>Jump if the (S) flag is set.<br>
+      If the (S) flag is set, jump forward 12 places.<br>
+      If the (S) flag is set, add 12 to (IP).<br>
+      If the (S) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JS Back</td>
+    <td>C3 FE</td>
+    <td>Jump if the (S) flag is set.<br>
+      If the (S) flag is set, jump back 2 places.<br>
+      If the (S) flag is set, add -2 to (IP).<br>
+      If the (S) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="jz"></a>JZ</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU flags are NOT set. 
+        JZ uses the (Z) flag.</h4>
+      <p align="left">The (Z) flag is set if a calculation gives a zero result.</p></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>JZ Forward</td>
+    <td>C1 12</td>
+    <td>Jump if the (Z) flag is set.<br>
+      If the (Z) flag is set, jump forward 12 places.<br>
+      If the (Z) flag is set, add 12 to (IP).<br>
+      If the (Z) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible forward jump is +127. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>JZ Back</td>
+    <td>C1 FE</td>
+    <td>Jump if the (Z) flag is set.<br>
+      If the (Z) flag is set, jump back 2 places.<br>
+      If the (Z) flag is set, add -2 to (IP).<br>
+      If the (Z) flag is NOT set, add 2 to (IP).<br>
+      The assembler calculates the jump distance. <br>
+      The biggest possible backward jump is -128. <br>
+      FE is -2. This is <a href="360-negativeNum.htm">explained</a> here. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="div"></a><a name="mod"></a>DIV 
+        and MOD</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>DIV AL,5</td>
+    <td>B3 00 05</td>
+    <td>Divide AL by 5. Answer goes into AL.<br>
+      DIV differs from the x86 DIV. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>DIV AL,BL </td>
+    <td>A3 00 01</td>
+    <td>Divide AL by BL. Answer goes into AL.<br>
+      DIV differs from the x86 DIV. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>MOD AL,5</td>
+    <td>B6 00 05</td>
+    <td>MOD AL by 5.<br>
+      Remainder after division goes into AL.<br>
+      MOD is not an x86 command. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>MOD AL,BL</td>
+    <td>A6 00 01</td>
+    <td> MOD AL by BL.<br>
+      Remainder after division goes into AL.<br>
+      MOD is not an x86 command. </td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3"><p>The x86 DIV calculates div and mod in one command. The 
+        answers are put into different registers. This is not possible with the 
+        8 bit simulator so div and mod are separated and simplified.</p>
+      <p> 8 DIV 3 is 3 (with remainder 2). 8 MOD 3 is 2</p></td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr bgcolor="#FFFFCC"> 
+    <td colspan="4"> <h3><a name="mov"></a>MOV</h3></td>
+  </tr>
+  <tr bgcolor="#FFFFCC"> 
+    <td colspan="4"> <h3>CPU flags are NOT set</h3></td>
+  </tr>
+  <tr valign="top" bgcolor="#FFFFCC"> 
+    <td><strong>Addressing&nbsp;Mode</strong></td>
+    <td><strong>Assembler&nbsp;Example<br>
+      Machine Code</strong></td>
+    <td><strong>Supported</strong></td>
+    <td><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff">Immediate</td>
+    <td bgcolor="#ddeeff">mov al,10<br>
+      <br>
+      <strong>D0 00 10</strong></td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">YES</div></td>
+    <td bgcolor="#ddeeff">Copy 10 into AL</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff">Direct (register)</td>
+    <td bgcolor="#ddeeff">mov al,bl</td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">NO</div></td>
+    <td bgcolor="#ddeeff">Copy BL into AL</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2" bgcolor="#ddeeff">Direct (memory)</td>
+    <td bgcolor="#ddeeff">mov al,[50]<br>
+      <br>
+      <strong>D1 00 50</strong></td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">YES</div></td>
+    <td bgcolor="#ddeeff">Copy data from RAM at address 50 into AL. [50] is a 
+      pointer to data held in a RAM location.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff">mov [40],cl<br>
+      <br>
+      <strong>D2 40 02</strong></td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">YES</div></td>
+    <td bgcolor="#ddeeff">Copy data from CL into RAM at address 40. [40] is a 
+      pointer to data held in a RAM location.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2" bgcolor="#ddeeff">Indirect</td>
+    <td bgcolor="#ddeeff">mov al,[bl]<br>
+      <br>
+      <strong>D3 00 01</strong></td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">YES</div></td>
+    <td bgcolor="#ddeeff">BL is a pointer to a RAM location. Copy data from that 
+      RAM location into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff"> mov [cl],dl<br>
+      <br>
+      <strong>D4 02 03</strong></td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">YES</div></td>
+    <td bgcolor="#ddeeff">CL is a pointer to a RAM location. Copy data from DL 
+      into that RAM location.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2" bgcolor="#ddeeff">Indexed</td>
+    <td bgcolor="#ddeeff">mov al,[20 + bl]</td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">NO</div></td>
+    <td bgcolor="#ddeeff">A data table is held in RAM at address 20. BL indexes 
+      a data item within the data table. Copy from the data table at address 20+BL 
+      into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff">mov [20 + bl],al</td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">NO</div></td>
+    <td bgcolor="#ddeeff">A data table is held in RAM at address 20. BL indexes 
+      a data item within the data table. Copy from AL into the data table at address 
+      20+BL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td rowspan="2" bgcolor="#ddeeff">Base Register</td>
+    <td bgcolor="#ddeeff">mov al,[bl+si]</td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">NO</div></td>
+    <td bgcolor="#ddeeff">BL points to a data table in memory. SI indexes to a 
+      record inside the data table. BL is called the &quot;base register&quot;. 
+      SI is called the &quot;offset or index&quot;. Copy from RAM at address BL+SI 
+      into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#ddeeff">mov [bl+si],al</td>
+    <td bgcolor="#ddeeff"> 
+      <div align="center">NO</div></td>
+    <td bgcolor="#ddeeff">BL points to a data table in memory. SI indexes to a 
+      record inside the data table. BL is called the &quot;base register&quot;. 
+      SI is called the &quot;offset&quot;. Copy from AL into RAM at address BL+SI.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3> <a name="mul"></a>MUL</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>MUL AL,BL</td>
+    <td>A2 00 01</td>
+    <td>Multiply AL by BL. The result goes into AL<br>
+      MUL differs from the x86 MUL. </td>
+  </tr>
+  <tr valign="top"> 
+    <td>MUL CL,12</td>
+    <td>B2 02 12</td>
+    <td>Multiply CL by 12. The result goes into CL<br>
+      MUL differs from the x86 MUL. </td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3"><p>The x86 MUL places the result into more than one register. 
+        This is not possible with the 8 bit simulator so MUL has been simplified. 
+        A disadvantage is that an overflow is much more likely to occur.</p></td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3> <a name="nop"></a>NOP</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>NOP</td>
+    <td>FF</td>
+    <td>Do nothing.<br>
+      Do nothing for one CPU clock cycle. <br>
+      This is needed to keep the CPU synchronised with accurately timed electronic 
+      circuits. <br>
+      The CPU might need to delay before the electronics are ready.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3> <a name="not"></a>NOT</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>NOT DL</td>
+    <td>AD 03</td>
+    <td>Invert all the bits in DL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3">If DL contained 01010101, after using NOT it will contain 
+      10101010.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3> <a name="or"></a>OR</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>OR AL,12</td>
+    <td>BB 00 12</td>
+    <td>Or 12 with AL. Answer goes into AL</td>
+  </tr>
+  <tr valign="top"> 
+    <td>OR BL,CL</td>
+    <td>AB 01 02</td>
+    <td>Or CL with BL. Answer goes into BL</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3">The OR rule is that two noughts give a nought. All other inputs 
+      give one.
+<pre>
+   10101010
+OR 00001111
+   --------
+ = 10101111
+</pre></td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3> <a name="org"></a>ORG</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>ORG 50</td>
+    <td>None</td>
+    <td>ORG is not a CPU instruction. It is an instruction to the assembler to 
+      tell it to generate code at a particular address. It is useful for writing 
+      procedures and interrupts. It can also be used to specify where in memory, 
+      data tables go.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="out"></a>OUT and IN</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>IN 07</td>
+    <td>F0 07</td>
+    <td>Input from port 07. The data is stored in the AL register.</td>
+  </tr>
+  <tr valign="top">
+    <td>OUT 03</td>
+    <td>F1 03</td>
+    <td>Output to port 03. The data comes from the AL register.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="push"></a><a name="pop"></a><a name="pushf"></a><a name="popf"></a>PUSH, 
+        POP, PUSHF and POPF</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine&nbsp;Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>PUSH AL</td>
+    <td>E0 00</td>
+    <td>Save AL onto the stack.<br>
+      Deduct one from the Stack Pointer (SP)</td>
+  </tr>
+  <tr valign="top"> 
+    <td>POP BL</td>
+    <td>E1 01</td>
+    <td>Add one to the stack pointer (SP).<br>
+      Restore BL from the stack</td>
+  </tr>
+  <tr valign="top"> 
+    <td>PUSHF</td>
+    <td>EA</td>
+    <td>Push the CPU flags from the status register (SR) onto the stack. Deduct 
+      one from the Stack Pointer (SP)</td>
+  </tr>
+  <tr valign="top"> 
+    <td>POPF</td>
+    <td>EB</td>
+    <td>Add one to the stack pointer (SP). POP the CPU flags from the stack into 
+      the ststus register (SR).</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3"><p>PUSH saves a byte onto the stack. POP gets it back.The 
+        stack is an area of memory that obeys the LIFO rule - Last In First Out. 
+        When pushing items onto the stack, remember to pop them off again in exact 
+        reverse order. The stack can be used to </p>
+      <ol>
+        <li> hold the return address of a procedure call</li>
+        <li> hold the return address of an interrupt call</li>
+        <li> pass parameters into procedures</li>
+        <li> get results back from procedures</li>
+        <li> save and restore registers and flags</li>
+        <li> reverse the order of data.</li>
+      </ol>
+      </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="ret"></a>RET and CALL</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">Assembler</td>
+    <td bgcolor="#FFFFCC">Machine Code</td>
+    <td bgcolor="#FFFFCC">Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CALL 50</td>
+    <td>CA 50</td>
+    <td>Call the procedure at address 50.<br>
+      The CPU pushes the instruction pointer value IP + 2 onto the stack. Later 
+      the CPU returns to this address.<br>
+      IP is then set to 50.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>RET</td>
+    <td>CB</td>
+    <td>The CPU instruction pointer is set to 50. The CPU executes instructions 
+      from this address until it reaches the RET command. It then pops the value 
+      of IP off the stack and jumps to this address where execution resumes.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="rol"></a><a name="ror"></a>ROL 
+        and ROR</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">Assembler</td>
+    <td bgcolor="#FFFFCC">Machine Code</td>
+    <td bgcolor="#FFFFCC">Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>ROL AL</td>
+    <td>9A 00</td>
+    <td>Rotate the bits in AL left one place.<br>
+      The leftmost bit is moved to the right end of the byte.<br>
+      Before ROL 10000110 - After ROL 00001101</td>
+  </tr>
+  <tr valign="top"> 
+    <td>ROR DL</td>
+    <td>9B 03</td>
+    <td>Rotate the bits in DL right one place.<br>
+      The rightmost bit is moved to the left end of the byte.<br>
+      Before ROR 10000110 - After ROR 01000011</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="shl"></a><a name="shr"></a>SHL 
+        and SHR</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr> 
+    <td bgcolor="#FFFFCC">Assembler</td>
+    <td bgcolor="#FFFFCC">Machine Code</td>
+    <td bgcolor="#FFFFCC">Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>SHL AL</td>
+    <td>9C 00</td>
+    <td>Shift bits left one place.<br>
+      The leftmost bit is discarded.<br>
+      Before SHL 10000110 - After SHL 00001100</td>
+  </tr>
+  <tr valign="top"> 
+    <td>SHR DL</td>
+    <td>9D 03</td>
+    <td>Shift bits right one place.<br>
+      The rightmost bit is discarded.<br>
+      Before SHR 10000110 - After SHR 01000011 </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="sti"></a>STI and CLI</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are NOT Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>STI</td>
+    <td>FC</td>
+    <td>STI sets the Interrupt flag.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>CLI</td>
+    <td>FD</td>
+    <td> CLI clears the Interrupt flag 'I' in the status register. STI sets the 
+      interrupt flag 'I' in the status register. The machine code for CLI is FD. 
+      The machine code for STI is FC.<br>
+      If (I) is set, the CPU will respond to interrupts. The simulator generates 
+      a hardware interrupt at regular time intervals that you can adjust. <br>
+      If 'I' is set, there should be an interrupt vector at address [02]. The 
+      CPU will jump to the code that this vector points to whenever there is an 
+      interrupt. </td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="sub"></a>SUB</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>SUB AL,12</td>
+    <td>B1 00 12</td>
+    <td>Subtract 12 from AL. The answer goes into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>SUB BL,CL</td>
+    <td>A1 01 02</td>
+    <td>Subtract CL from BL. The answer goes into BL.</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<table width="600" border="1" cellpadding="2" cellspacing="0">
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h3><a name="xor"></a>XOR</h3></td>
+  </tr>
+  <tr> 
+    <td colspan="3" bgcolor="#FFFFCC"> <h4 align="left">CPU Flags are Set</h4></td>
+  </tr>
+  <tr valign="top"> 
+    <td>Assembler</td>
+    <td>Machine Code</td>
+    <td>Explanation</td>
+  </tr>
+  <tr valign="top"> 
+    <td>XOR AL,12</td>
+    <td>BC 00 12</td>
+    <td>12 XOR AL. The answer goes into AL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td>XOR BL,CL</td>
+    <td>AC 01 02</td>
+    <td>CL XOR BL. The answer goes into BL.</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="3"><p>XOR can be used to invert selected bits.</p>
+<pre>
+     00001111 This is a bit mask.
+ XOR 01010101
+     --------
+     01011010 
+</pre>
+		<p>The left four bits are unaltered. The right four bits are inverted.</p>
+</td>
+  </tr>
+</table>
+<p><a href="#top">Top</a></p>
+<p><a href="index.htm">Home</a> | <a href="360-negativeNum.htm">Previous</a> | 
+  <a href="380-TruthTables.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+</body>
+</html>

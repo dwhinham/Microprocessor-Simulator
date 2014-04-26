@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Jump Instructions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="000sms32v50.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td><a href="index.htm"><img src="005logo.PNG" alt="Site Logo" width="64" height="63"></a></td>
+    <td><h1>Jump Instructions</h1>
+      <p><a href="http://www.softwareforeducation.com/" target="_blank">Website</a></p></td>
+  </tr>
+</table>
+<p><a href="index.htm">Home</a> | <a href="260-ArithAndLogic.htm">Previous</a> 
+  | <a href="280-Moves.htm">Next</a></p>
+<h3>Jump Instructions - Flags are NOT set.</h3>
+
+<p>These instructions do NOT set the Z, S or O flags but conditional jumps use 
+  the flags to determine whether or not to jump.</p>
+<p>The CPU contains a <strong>status register - SR</strong>. This contains flags 
+  that are set or cleared depending on the most recent calculation performed by 
+  the processor. The <strong>CMP</strong> compare instruction performs a subtraction 
+  like the <strong>SUB</strong> command. It sets the flags but the result is not 
+  stored.</p>
+<h3>The Flags - ISOZ</h3>
+<ol>
+  <li><strong>ZERO</strong> - The Z flag is set if the most recent calculation 
+    gave a zero result.</li>
+  <li><strong>SIGN</strong> - The S flag is set if the most recent calculation 
+    gave a negative result.</li>
+  <li><strong>OVERFLOW</strong> - The O flag is set if the most recent calculation 
+    gave a result too big to fit a register.</li>
+  <li><strong>INTERRUPT</strong> - The I flag is set in software using the <strong>STI</strong> 
+    command. If this flag is set, the CPU will respond to hardware interrupts. 
+    The <strong>CLI</strong> command clears the I flag and hardware interrupts 
+    are ignored. The I flag is off by default.</li>
+</ol>
+<p>The programmer enters a command like <strong>JMP HERE.</strong> The assembler 
+  converts this into machine code by calculating how far to jump. This tedious 
+  and error prone taks (for humans) is automated. In an 8 bit register, the largest 
+  numbers that can be stored are -128 and +127. This limits the maximum distance 
+  a jump can go. Negative numbers cause the processor to jump backwards towards 
+  zero. Positive numbers cause the processor to jump forward towards 255. The 
+  jump distance is added to <strong>IP</strong>, the instruction pointer.</p>
+<p>To understand jumps properly, you also need to understand <a href="360-negativeNum.htm">negative 
+  numbers</a>.</p>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr valign="top"> 
+    <td bgcolor="#FFFFCC"> 
+      <div align="center"><strong>COMMANDS</strong></div></td>
+    <td colspan="3" bgcolor="#FFFFCC"><strong> EXAMPLES</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center"><strong>OP</strong></div></td>
+    <td bgcolor="#99FFFF"><strong>Assembler</strong></td>
+    <td bgcolor="#99FFFF"><strong>Machine Code</strong></td>
+    <td bgcolor="#99FFFF"><strong>Explanation</strong></td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JMP</div></td>
+    <td bgcolor="#99FFFF">JMP HERE</td>
+    <td bgcolor="#99FFFF">C0 25</td>
+    <td bgcolor="#99FFFF">Unconditional jump. Flags are ignored.<br>
+      Jump forward <strong>25h</strong> RAM locations.</td>
+  </tr>
+  <tr valign="top">
+    <td bgcolor="#CCFFFF"><div align="center">JMP</div></td>
+    <td bgcolor="#99FFFF">JMP BACK</td>
+    <td bgcolor="#99FFFF">C0 FE</td>
+    <td bgcolor="#99FFFF">Jump Unconditional jump. Flags are ignored.<br>
+      Jump back <strong>-2d</strong> RAM locations.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JZ</div></td>
+    <td bgcolor="#99FFFF">JZ STOP</td>
+    <td bgcolor="#99FFFF">C1 42</td>
+    <td bgcolor="#99FFFF">Jump Zero. Jump if the zero flag (Z) is set. <br>
+      Jump forward <strong>+42h</strong> places if the (Z) flag is set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JZ</div></td>
+    <td bgcolor="#99FFFF">JZ START</td>
+    <td bgcolor="#99FFFF">C1 F2</td>
+    <td bgcolor="#99FFFF">Jump Zero. Jump if the zero flag (Z) is set. <br>
+      Jump back <strong>-14d</strong> places if the (Z) flag is set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNZ</div></td>
+    <td bgcolor="#99FFFF">JNZ&nbsp;FORWARD</td>
+    <td bgcolor="#99FFFF">C2 22</td>
+    <td bgcolor="#99FFFF">Jump Not Zero. Jump if the zero flag (Z) is <strong>NOT</strong> 
+      set.<br>
+      Jump forward <strong>22h</strong> places if the (Z) flag is <strong>NOT</strong> 
+      set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNZ</div></td>
+    <td bgcolor="#99FFFF">JNZ REP</td>
+    <td bgcolor="#99FFFF">C2 EE</td>
+    <td bgcolor="#99FFFF">Jump Not Zero. Jump if the zero flag (Z) is <strong>NOT</strong> 
+      set.<br>
+      Jump back <strong>-18d</strong> places if the (Z) flag is <strong>NOT</strong> 
+      set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JS</div></td>
+    <td bgcolor="#99FFFF">JS Minus</td>
+    <td bgcolor="#99FFFF">C3 14</td>
+    <td bgcolor="#99FFFF">Jump Sign. Jump if the sign flag (S) is set.<br>
+      Jump forward <strong>14h</strong> places if the sign flag (S) is set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JS</div></td>
+    <td bgcolor="#99FFFF">JS Minus2</td>
+    <td bgcolor="#99FFFF">C3 FC</td>
+    <td bgcolor="#99FFFF">Jump Sign. Jump if the sign flag (S) is set.<br>
+      Jump back <strong>-4d</strong> places if the sign flag (S) is set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNS</div></td>
+    <td bgcolor="#99FFFF">JNS Plus</td>
+    <td bgcolor="#99FFFF">C4 33</td>
+    <td bgcolor="#99FFFF">Jump Not Sign. Jump if the sign flag (S) is <strong>NOT</strong> 
+      set.<br>
+      Jump forward <strong>33h</strong> places if the sign flag (S) is <strong>NOT</strong> 
+      set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNS</div></td>
+    <td bgcolor="#99FFFF">JNS Plus2</td>
+    <td bgcolor="#99FFFF">C4 E2</td>
+    <td bgcolor="#99FFFF">Jump Not Sign. Jump if the sign flag (S) is <strong>NOT</strong> 
+      set.<br>
+      Jump back <strong>-30d</strong> places if the sign flag (S) is <strong>NOT</strong> 
+      set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JO</div></td>
+    <td bgcolor="#99FFFF">JO TooBig</td>
+    <td bgcolor="#99FFFF">C5 12</td>
+    <td bgcolor="#99FFFF">Jump Overflow. Jump if the overflow flag (O) is set.<br>
+      Jump forward <strong>12h</strong> places if the overflow flag (O) is set. 
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JO</div></td>
+    <td bgcolor="#99FFFF">JO ReDo</td>
+    <td bgcolor="#99FFFF">C5 DF</td>
+    <td bgcolor="#99FFFF">Jump Overflow. Jump if the overflow flag (O) is set.<br>
+      Jump back <strong>-33d</strong> places if the overflow flag (O) is set.</td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNO</div></td>
+    <td bgcolor="#99FFFF">JNO OK</td>
+    <td bgcolor="#99FFFF">C6 33</td>
+    <td bgcolor="#99FFFF">Jump Not Overflow. Jump if the overflow flag (O) is 
+      <strong>NOT</strong> set.<br>
+      Jump forward <strong>33h</strong> places if the overflow flag (O) is <strong>NOT</strong> 
+      set. </td>
+  </tr>
+  <tr valign="top"> 
+    <td bgcolor="#CCFFFF"><div align="center">JNO</div></td>
+    <td bgcolor="#99FFFF">JNO Back</td>
+    <td bgcolor="#99FFFF">C6 E0</td>
+    <td bgcolor="#99FFFF">Jump Not Overflow. Jump if the overflow flag (O) is 
+      <strong>NOT</strong> set.<br>
+      Jump back <strong>-32d</strong> places if the overflow flag (O) is <strong>NOT</strong> 
+      set.</td>
+  </tr>
+</table>
+<p>The full 8086 instruction set has many other jumps. There are more flags in 
+  the 8086 as well!</p>
+<h3> Legal Destination Labels</h3>
+<table border="1" cellspacing="0" cellpadding="2">
+  <tr>
+    <td>here:</td>
+    <td>A nice correct label.</td>
+  </tr>
+  <tr>
+    <td>here::</td>
+    <td>Not allowed Only one colon is permitted.</td>
+  </tr>
+  <tr>
+    <td>1234:</td>
+    <td>Not allowed. Labels must begin with a letter or '_'.</td>
+  </tr>
+  <tr>
+    <td>_:</td>
+    <td>OK but not human friendly.</td>
+  </tr>
+  <tr>
+    <td>here</td>
+    <td>Destination labels must end in a colon.</td>
+  </tr>
+</table>
+<p>Some of these rules are not strictly enforced in the simulator.</p>
+<p><a href="index.htm">Home</a> | <a href="260-ArithAndLogic.htm">Previous</a> 
+  | <a href="280-Moves.htm">Next</a></p>
+<p>&copy; C Neil Bauers 2003</p>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=..\sms32v50.chm
+Default topic=index.htm
+Display compile progress=Yes
+Full-text search=Yes
+Language=0x809 English (United Kingdom)
+Title=Microprocessor Simulator Help
+
+
+[FILES]
+010who.htm
+020architecture.htm
+030install.htm
+040uninstall.htm
+060faq.htm
+070pcsupport.htm
+080getting-started.htm
+090learning-tasks.htm
+100-01first.htm
+110-99nasty.htm
+120-02tlight.htm
+130-03move.htm
+140-04IncJmp.htm
+150-05keyb-in.htm
+160-06proc.htm
+170-07textio.htm
+180-08table.htm
+190-09param.htm
+200-10swint.htm
+210-11hwint.htm
+215-shortcut.htm
+220-ascii.htm
+230-glossary.htm
+240-hex-bin.htm
+245-IsetSummary.htm
+250-FullIset.htm
+260-ArithAndLogic.htm
+270-Jumps.htm
+280-Moves.htm
+290-Compare.htm
+300-Stack.htm
+310-Procedures.htm
+320-InputOutput.htm
+330-OtherInstructions.htm
+350-ListFile.htm
+360-negativeNum.htm
+370-Pop-up-help.htm
+380-TruthTables.htm
+390-TheEditor.htm
+400-Peripherals.htm
+index.htm
+
+[INFOTYPES]
+
