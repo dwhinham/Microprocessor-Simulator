@@ -157,6 +157,9 @@ type
     Splitter1: TSplitter;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    Bevel3: TBevel;
+    LabelCPUInterval: TLabel;
+
     procedure MenuFileExitClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure MenuFileOpenClick(Sender: TObject);
@@ -238,6 +241,7 @@ type
     procedure HideAll1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
+    procedure UpdateCPUIntervalLabel;
   private
     { Private declarations }
   public
@@ -971,6 +975,8 @@ begin
   begin
     timerCPU.interval := 4096;
   end;
+
+  UpdateCPUIntervalLabel;
 end;
 
 procedure TFormMain.ButtonFastClick(Sender: TObject);
@@ -981,6 +987,8 @@ begin
   begin
     timerCPU.interval := 2
   end;
+
+  UpdateCPUIntervalLabel;
 end;
 
 procedure TFormMain.memoSourceChange(Sender: TObject);
@@ -1209,6 +1217,7 @@ begin
   FormKeyPad.Left := myIniFile.ReadInteger('KeyPad', 'Left', 800 - FormKeyPad.width);
 
   timerCPU.interval := myIniFile.ReadInteger('CPU_Clock', 'Interval', 1024);
+  UpdateCPUIntervalLabel;
 
   showOnlyOne := myIniFile.ReadBool('OneWindowAtATime', 'Show', False);
   checkBoxClo.Checked := showOnlyOne;
@@ -2006,6 +2015,20 @@ end;
 procedure TFormMain.error(msg : string);
 begin
   messageDlg(msg, mtError, [mbOK], 0);
+end;
+
+procedure TFormMain.UpdateCPUIntervalLabel;
+begin
+  if TimerCPU.interval = 1024 then
+  begin
+  LabelCPUInterval.Font.Color := clGreen;
+  LabelCPUInterval.Caption := 'CPU: ' + IntToStr(timerCPU.interval) + 'ms (default)';
+  end
+  else
+  begin
+  LabelCPUInterval.Font.Color := clBlack;
+  LabelCPUInterval.Caption := 'CPU: ' + IntToStr(timerCPU.interval) + 'ms per cycle';
+  end;
 end;
 
 end.

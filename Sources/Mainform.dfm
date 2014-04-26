@@ -1,7 +1,7 @@
 object FormMain: TFormMain
   Left = 326
   Top = 178
-  Width = 640
+  Width = 690
   Height = 400
   HelpContext = 1
   Caption = 'Untitled'
@@ -25,7 +25,7 @@ object FormMain: TFormMain
   object PageControl1: TPageControl
     Left = 0
     Top = 113
-    Width = 632
+    Width = 682
     Height = 241
     ActivePage = TabSheetSourceCode
     Align = alClient
@@ -37,7 +37,7 @@ object FormMain: TFormMain
       object memoSource: TMemo
         Left = 0
         Top = 0
-        Width = 624
+        Width = 674
         Height = 210
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -144,7 +144,7 @@ object FormMain: TFormMain
       object Splitter1: TSplitter
         Left = 0
         Top = 185
-        Width = 624
+        Width = 674
         Height = 3
         Cursor = crVSplit
         Align = alTop
@@ -152,7 +152,7 @@ object FormMain: TFormMain
       object ListBoxTokens: TListBox
         Left = 0
         Top = 188
-        Width = 624
+        Width = 674
         Height = 22
         Align = alClient
         ItemHeight = 16
@@ -162,7 +162,7 @@ object FormMain: TFormMain
       object MemoAsmLog: TMemo
         Left = 0
         Top = 0
-        Width = 624
+        Width = 674
         Height = 185
         Align = alTop
         ReadOnly = True
@@ -177,8 +177,8 @@ object FormMain: TFormMain
       object RichEdit1: TRichEdit
         Left = 0
         Top = 0
-        Width = 624
-        Height = 210
+        Width = 677
+        Height = 211
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
@@ -188,7 +188,7 @@ object FormMain: TFormMain
   object PanelTop: TPanel
     Left = 0
     Top = 0
-    Width = 632
+    Width = 682
     Height = 113
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -199,7 +199,7 @@ object FormMain: TFormMain
     ParentFont = False
     TabOrder = 0
     DesignSize = (
-      632
+      682
       113)
     object Bevel2: TBevel
       Left = 145
@@ -344,7 +344,7 @@ object FormMain: TFormMain
     object LabelCurrInstr: TLabel
       Left = 1
       Top = 74
-      Width = 624
+      Width = 677
       Height = 16
       Anchors = [akLeft, akTop, akRight]
       AutoSize = False
@@ -949,6 +949,26 @@ object FormMain: TFormMain
       ShowHint = True
       OnClick = SpeedButton4Click
     end
+    object Bevel3: TBevel
+      Left = 493
+      Top = 27
+      Width = 121
+      Height = 21
+    end
+    object LabelCPUInterval: TLabel
+      Left = 498
+      Top = 31
+      Width = 106
+      Height = 13
+      Hint = 'CPU Interval (ms per cycle)'
+      Caption = 'CPU: 1024ms (default)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object ButtonAssemble: TButton
       Left = 432
       Top = 3
@@ -1006,7 +1026,7 @@ object FormMain: TFormMain
     object ButtonStop: TButton
       Left = 493
       Top = 49
-      Width = 60
+      Width = 121
       Height = 23
       Hint = 'STOP CONTINUOUS RUN'
       Caption = 'ST&OP'
@@ -1022,7 +1042,7 @@ object FormMain: TFormMain
       OnClick = ButtonStopClick
     end
     object ButtonContinuous: TButton
-      Left = 554
+      Left = 615
       Top = 3
       Width = 60
       Height = 23
@@ -1040,7 +1060,7 @@ object FormMain: TFormMain
       OnClick = ButtonContinuousClick
     end
     object ButtonReset: TButton
-      Left = 554
+      Left = 615
       Top = 26
       Width = 60
       Height = 23
@@ -1058,7 +1078,7 @@ object FormMain: TFormMain
       OnClick = ButtonResetClick
     end
     object ButtonShowRam: TButton
-      Left = 554
+      Left = 615
       Top = 49
       Width = 60
       Height = 23
@@ -1094,8 +1114,8 @@ object FormMain: TFormMain
       OnClick = ButtonSlowClick
     end
     object ButtonFast: TButton
-      Left = 493
-      Top = 26
+      Left = 554
+      Top = 3
       Width = 60
       Height = 23
       Hint = 'SPEED UP CPU CLOCK'
