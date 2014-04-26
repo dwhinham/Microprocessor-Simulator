@@ -968,6 +968,8 @@ object FormMain: TFormMain
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
     end
     object ButtonAssemble: TButton
       Left = 432
