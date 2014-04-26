@@ -58,7 +58,7 @@ the program's exe file directory.  If sms32v50.ini does not exist,
 it will be created with default values.
 
 
-### This Program is distributed under GNU/GPL 
+### 3. This Program is distributed under GNU/GPL 
 
     Author  : C N Bauers
     Contact : nbauers@samphire.demon.co.uk
@@ -99,7 +99,7 @@ Please see the GNU/GPL for what you can and can't do.
 
 Please check the website before mailing this address. It was correct in February 2009.
 
-### Disclaimer
+### 6. Disclaimer
 
 This simulation software is not guaranteed in any way.  It may 
 differ from reality.  It might not even work at all.  Try it 
