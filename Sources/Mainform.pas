@@ -1208,7 +1208,7 @@ begin
   FormKeyPad.Top  := myIniFile.ReadInteger('KeyPad', 'Top',  30 );
   FormKeyPad.Left := myIniFile.ReadInteger('KeyPad', 'Left', 800 - FormKeyPad.width);
 
-  timerCPU.interval := myIniFile.ReadInteger('CPU_Clock', 'Interval', 1000);
+  timerCPU.interval := myIniFile.ReadInteger('CPU_Clock', 'Interval', 1024);
 
   showOnlyOne := myIniFile.ReadBool('OneWindowAtATime', 'Show', False);
   checkBoxClo.Checked := showOnlyOne;
